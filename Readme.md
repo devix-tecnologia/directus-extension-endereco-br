@@ -1,4 +1,4 @@
-![](https://raw.githubusercontent.com/devix-tecnologia/directus-extension-endereco-br/main/docs/Banner.jpg)
+![](https://github.com/devix-tecnologia/directus-extension-endereco-br/raw/main/docs/Banner.jpg)
 
 
 # Extensão do Directus para trabalhar com endereços do Brasil
@@ -43,28 +43,28 @@ npm i directus-extension-endereco-br
 ```
 
 ## 🖼 Screenshots
-![](https://raw.githubusercontent.com/devix-tecnologia/directus-extension-endereco-br/main/docs/pesquisa.png)
+![](https://github.com/devix-tecnologia/directus-extension-endereco-br/raw/main/docs/pesquisa.png)
 *↑ Faça a pesquisa por CEP e selecione o endereço rapidamente*
 
 ---
 
-![](https://raw.githubusercontent.com/devix-tecnologia/directus-extension-endereco-br/main/docs/preenchendo_adicional.png)
+![](https://github.com/devix-tecnologia/directus-extension-endereco-br/raw/main/docs/preenchendo_adicional.png)
 *↑ Preencha informações adicionais para completar o cadastro*
 
 ---
 
-![](https://raw.githubusercontent.com/devix-tecnologia/directus-extension-endereco-br/main/docs/preenchimento_automatico.png)
+![](https://github.com/devix-tecnologia/directus-extension-endereco-br/raw/main/docs/preenchimento_automatico.png)
 *↑ Ao salvar os dados os principais campos são preenchidos com os dados da pesquisa automática*
 
 ---
 
-![](https://raw.githubusercontent.com/devix-tecnologia/directus-extension-endereco-br/main/docs/georeferenciamento.png)
+![](https://github.com/devix-tecnologia/directus-extension-endereco-br/raw/main/docs/georeferenciamento.png)
 
 *↑ Georeferenciamento do endereço caso seja configurado*
 
 ---
 
-![](https://raw.githubusercontent.com/devix-tecnologia/directus-extension-endereco-br/main/docs/cidade_bairro_automatico.png)
+![](https://github.com/devix-tecnologia/directus-extension-endereco-br/raw/main/docs/cidade_bairro_automatico.png)
 *↑ Cadastro automático de bairro e cidades incluindo informaçoes do IBGE*
 
 
