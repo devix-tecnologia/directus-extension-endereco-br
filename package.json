@@ -2,7 +2,7 @@
 	"name": "directus-extension-endereco-br",
 	"description": "Extensão do Directus para trabalhar com endereços do Brasil",
 	"icon": "extension",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"license": "MIT",
 	"keywords": [
 		"directus",
