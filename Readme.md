@@ -1,4 +1,4 @@
-![](https://github.com/devix-tecnologia/directus-extension-endereco-br/raw/main/docs/Banner.jpg)
+![](https://github.com/devix-tecnologia/directus-extension-endereco-br/raw/main/docs/Banner.png)
 
 
 # Extensão do Directus para trabalhar com endereços do Brasil
@@ -67,4 +67,10 @@ npm i directus-extension-endereco-br
 ![](https://github.com/devix-tecnologia/directus-extension-endereco-br/raw/main/docs/cidade_bairro_automatico.png)
 *↑ Cadastro automático de bairro e cidades incluindo informaçoes do IBGE*
 
+## Autores
+
+- [Lucas Scart](https://github.com/scart97)
+- [Fernando Gatti](https://github.com/gattifernando)
+- [Rafael Paviotti](https://github.com/RPaviotti)
+- [Sidarta Veloso](https://github.com/sidartaveloso)
 
