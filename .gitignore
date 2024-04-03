@@ -1,0 +1,9 @@
+knex-logs
+docker-files
+uploads
+node_modules
+.env
+db_data
+driva_upload
+pgadmin4_data
+dist/

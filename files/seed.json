@@ -1,0 +1,138 @@
+[
+	{
+		"nome": "Brasil",
+		"sigla": "BRA",
+		"estados": [
+			{
+				"nome": "São Paulo",
+				"sigla": "SP",
+				"codigo_ibge": "35"
+			},
+			{
+				"nome": "Rio de Janeiro",
+				"sigla": "RJ",
+				"codigo_ibge": "33"
+			},
+			{
+				"nome": "Bahia",
+				"sigla": "BA",
+				"codigo_ibge": "29"
+			},
+			{
+				"nome": "Amazonas",
+				"sigla": "AM",
+				"codigo_ibge": "13"
+			},
+			{
+				"nome": "Maranhão",
+				"sigla": "MA",
+				"codigo_ibge": "21"
+			},
+			{
+				"nome": "Paraná",
+				"sigla": "PR",
+				"codigo_ibge": "41"
+			},
+			{
+				"nome": "Rio Grande do Norte",
+				"sigla": "RN",
+				"codigo_ibge": "24"
+			},
+			{
+				"nome": "Pernambuco",
+				"sigla": "PE",
+				"codigo_ibge": "26"
+			},
+			{
+				"nome": "Minas Gerais",
+				"sigla": "MG",
+				"codigo_ibge": "31"
+			},
+			{
+				"nome": "Goiás",
+				"sigla": "GO",
+				"codigo_ibge": "52"
+			},
+			{
+				"nome": "Sergipe",
+				"sigla": "SE",
+				"codigo_ibge": "28"
+			},
+			{
+				"nome": "Mato Grosso do Sul",
+				"sigla": "MS",
+				"codigo_ibge": "50"
+			},
+			{
+				"nome": "Espírito Santo",
+				"sigla": "ES",
+				"codigo_ibge": "32"
+			},
+			{
+				"nome": "Pará",
+				"sigla": "PA",
+				"codigo_ibge": "15"
+			},
+			{
+				"nome": "Acre",
+				"sigla": "AC",
+				"codigo_ibge": "12"
+			},
+			{
+				"nome": "Roraima",
+				"sigla": "RR",
+				"codigo_ibge": "14"
+			},
+			{
+				"nome": "Ceará",
+				"sigla": "CE",
+				"codigo_ibge": "23"
+			},
+			{
+				"nome": "Amapá",
+				"sigla": "AP",
+				"codigo_ibge": "16"
+			},
+			{
+				"nome": "Paraíba",
+				"sigla": "PB",
+				"codigo_ibge": "25"
+			},
+			{
+				"nome": "Distrito Federal",
+				"sigla": "DF",
+				"codigo_ibge": "53"
+			},
+			{
+				"nome": "Mato Grosso",
+				"sigla": "MT",
+				"codigo_ibge": "51"
+			},
+			{
+				"nome": "Rio Grande do Sul",
+				"sigla": "RS",
+				"codigo_ibge": "43"
+			},
+			{
+				"nome": "Rondônia",
+				"sigla": "RO",
+				"codigo_ibge": "11"
+			},
+			{
+				"nome": "Santa Catarina",
+				"sigla": "SC",
+				"codigo_ibge": "42"
+			},
+			{
+				"nome": "Alagoas",
+				"sigla": "AL",
+				"codigo_ibge": "27"
+			},
+			{
+				"nome": "Piauí",
+				"sigla": "PI",
+				"codigo_ibge": "22"
+			}
+		]
+	}
+]

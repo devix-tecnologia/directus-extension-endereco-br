@@ -1,0 +1,60 @@
+{
+	"name": "directus-extension-endereco-br",
+	"description": "Extensão do Directus para trabalhar com endereços do Brasil",
+	"icon": "extension",
+	"version": "0.1.0",
+	"license": "MIT",
+	"keywords": [
+		"directus",
+		"directus-extension",
+		"directus-custom-bundle"
+	],
+	"type": "module",
+	"directus:extension": {
+		"type": "bundle",
+		"path": {
+			"app": "dist/app.js",
+			"api": "dist/api.js"
+		},
+		"entries": [
+			{
+				"type": "endpoint",
+				"name": "pesquisa-cep",
+				"source": "src/pesquisa-cep-endpoint/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "endereco_br_hook",
+				"source": "src/endereco_br_hook/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "db-configuration-hook",
+				"source": "src/db-configuration-hook/index.ts"
+			}
+		],
+		"host": "^10.3.4"
+	},
+	"scripts": {
+		"build": "directus-extension build && tsup src/services/ src/utils/ --format esm --dts",
+		"dev": "directus-extension build -w --no-minify",
+		"link": "directus-extension link",
+		"add": "directus-extension add",
+		"postbuild": "cp ./files/* ./dist/",
+		"predev": "cp ./files/* ./dist/"
+	},
+	"devDependencies": {
+		"@directus/api": "^17.1.0",
+		"@directus/extensions-sdk": "10.3.4",
+		"@types/node": "^20.11.25",
+		"tsup": "^8.0.2",
+		"typescript": "^5.4.2"
+	},
+	"dependencies": {
+		"axios": "^1.6.7"
+	},
+	"files": [
+		"dist/",
+		"package.json"
+	]
+}

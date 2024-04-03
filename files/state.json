@@ -1,0 +1,3500 @@
+{
+    "collections": [
+        {
+            "collection": "endereco_br",
+            "meta": {
+                "collection": "endereco_br",
+                "icon": "location_on",
+                "note": null,
+                "display_template": null,
+                "hidden": false,
+                "singleton": false,
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Endereço",
+                        "singular": "Endereço",
+                        "plural": "Endereços"
+                    }
+                ],
+                "archive_field": "status",
+                "archive_app_filter": true,
+                "archive_value": "archived",
+                "unarchive_value": "draft",
+                "sort_field": null,
+                "accountability": "all",
+                "color": "#818283",
+                "item_duplication_fields": null,
+                "sort": 1,
+                "group": "extension_endereco_br",
+                "collapse": "open",
+                "preview_url": null
+            },
+            "schema": {}
+        },
+        {
+            "collection": "extension_endereco_br",
+            "meta": {
+                "collection": "extension_endereco_br",
+                "icon": "folder",
+                "note": null,
+                "display_template": null,
+                "hidden": false,
+                "singleton": false,
+                "translations": null,
+                "archive_field": null,
+                "archive_app_filter": true,
+                "archive_value": null,
+                "unarchive_value": null,
+                "sort_field": null,
+                "accountability": "all",
+                "color": null,
+                "item_duplication_fields": null,
+                "sort": 1,
+                "group": null,
+                "collapse": "open",
+                "preview_url": null
+            },
+            "schema": null
+        },
+        {
+            "collection": "bairro",
+            "meta": {
+                "collection": "bairro",
+                "icon": "flag_circle",
+                "note": null,
+                "display_template": "{{nome}}",
+                "hidden": false,
+                "singleton": false,
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Bairro",
+                        "singular": "Bairro",
+                        "plural": "Bairros"
+                    }
+                ],
+                "archive_field": null,
+                "archive_app_filter": true,
+                "archive_value": "true",
+                "unarchive_value": "false",
+                "sort_field": null,
+                "accountability": "all",
+                "color": "#818283",
+                "item_duplication_fields": null,
+                "sort": 2,
+                "group": "extension_endereco_br",
+                "collapse": "open",
+                "preview_url": null
+            },
+            "schema": {}
+        },
+        {
+            "collection": "cidade",
+            "meta": {
+                "collection": "cidade",
+                "icon": "flag_circle",
+                "note": null,
+                "display_template": "{{nome}}",
+                "hidden": false,
+                "singleton": false,
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Cidade",
+                        "singular": "Cidade",
+                        "plural": "Cidades"
+                    }
+                ],
+                "archive_field": null,
+                "archive_app_filter": true,
+                "archive_value": "true",
+                "unarchive_value": "false",
+                "sort_field": null,
+                "accountability": "all",
+                "color": "#818283",
+                "item_duplication_fields": null,
+                "sort": 3,
+                "group": "extension_endereco_br",
+                "collapse": "open",
+                "preview_url": null
+            },
+            "schema": {}
+        },
+        {
+            "collection": "estado",
+            "meta": {
+                "collection": "estado",
+                "icon": "flag_circle",
+                "note": null,
+                "display_template": "{{sigla}}",
+                "hidden": false,
+                "singleton": false,
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Estado (UF)",
+                        "singular": "Estado",
+                        "plural": "Estados"
+                    }
+                ],
+                "archive_field": null,
+                "archive_app_filter": true,
+                "archive_value": "true",
+                "unarchive_value": "false",
+                "sort_field": null,
+                "accountability": "all",
+                "color": "#818283",
+                "item_duplication_fields": null,
+                "sort": 4,
+                "group": "extension_endereco_br",
+                "collapse": "open",
+                "preview_url": null
+            },
+            "schema": {}
+        },
+        {
+            "collection": "pais",
+            "meta": {
+                "collection": "pais",
+                "icon": "flag_circle",
+                "note": null,
+                "display_template": "{{nome}}",
+                "hidden": false,
+                "singleton": false,
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "País",
+                        "singular": "País",
+                        "plural": "Países"
+                    }
+                ],
+                "archive_field": null,
+                "archive_app_filter": true,
+                "archive_value": "true",
+                "unarchive_value": "false",
+                "sort_field": null,
+                "accountability": "all",
+                "color": "#818283",
+                "item_duplication_fields": null,
+                "sort": 5,
+                "group": "extension_endereco_br",
+                "collapse": "open",
+                "preview_url": null
+            },
+            "schema": {}
+        }
+    ],
+    "fields": [
+        {
+            "collection": "endereco_br",
+            "field": "id",
+            "type": "uuid",
+            "schema": {
+                "name": "id",
+                "table": "endereco_br",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": false,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": true,
+                "is_primary_key": true,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "endereco_br",
+                "field": "id",
+                "special": [
+                    "uuid"
+                ],
+                "interface": "input",
+                "options": null,
+                "display": null,
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": 1,
+                "width": "full",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "endereco_br",
+            "field": "status",
+            "type": "string",
+            "schema": {
+                "name": "status",
+                "table": "endereco_br",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": "published",
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "endereco_br",
+                "field": "status",
+                "special": null,
+                "interface": "select-dropdown",
+                "options": {
+                    "choices": [
+                        {
+                            "text": "Publicado",
+                            "value": "published"
+                        },
+                        {
+                            "text": "Rascunho",
+                            "value": "draft"
+                        },
+                        {
+                            "text": "Arquivado",
+                            "value": "archived"
+                        }
+                    ]
+                },
+                "display": "labels",
+                "display_options": {
+                    "showAsDot": true,
+                    "choices": [
+                        {
+                            "text": "Publicado",
+                            "value": "published",
+                            "foreground": "#FFFFFF",
+                            "background": "var(--primary)"
+                        },
+                        {
+                            "text": "Rascunho",
+                            "value": "draft",
+                            "foreground": "#18222F",
+                            "background": "#D3DAE4"
+                        },
+                        {
+                            "text": "Arquivado",
+                            "value": "archived",
+                            "foreground": "#FFFFFF",
+                            "background": "var(--warning)"
+                        }
+                    ]
+                },
+                "readonly": false,
+                "hidden": true,
+                "sort": 2,
+                "width": "full",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "endereco_br",
+            "field": "user_created",
+            "type": "uuid",
+            "schema": {
+                "name": "user_created",
+                "table": "endereco_br",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id"
+            },
+            "meta": {
+                "collection": "endereco_br",
+                "field": "user_created",
+                "special": [
+                    "user-created"
+                ],
+                "interface": "select-dropdown-m2o",
+                "options": {
+                    "template": "{{avatar.$thumbnail}} {{first_name}} {{last_name}}"
+                },
+                "display": "user",
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": 3,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "endereco_br",
+            "field": "date_created",
+            "type": "timestamp",
+            "schema": {
+                "name": "date_created",
+                "table": "endereco_br",
+                "schema": "public",
+                "data_type": "timestamp with time zone",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "endereco_br",
+                "field": "date_created",
+                "special": [
+                    "date-created"
+                ],
+                "interface": "datetime",
+                "options": null,
+                "display": "datetime",
+                "display_options": {
+                    "relative": true
+                },
+                "readonly": true,
+                "hidden": true,
+                "sort": 4,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "endereco_br",
+            "field": "user_updated",
+            "type": "uuid",
+            "schema": {
+                "name": "user_updated",
+                "table": "endereco_br",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id"
+            },
+            "meta": {
+                "collection": "endereco_br",
+                "field": "user_updated",
+                "special": [
+                    "user-updated"
+                ],
+                "interface": "select-dropdown-m2o",
+                "options": {
+                    "template": "{{avatar.$thumbnail}} {{first_name}} {{last_name}}"
+                },
+                "display": "user",
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": 5,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "endereco_br",
+            "field": "date_updated",
+            "type": "timestamp",
+            "schema": {
+                "name": "date_updated",
+                "table": "endereco_br",
+                "schema": "public",
+                "data_type": "timestamp with time zone",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "endereco_br",
+                "field": "date_updated",
+                "special": [
+                    "date-updated"
+                ],
+                "interface": "datetime",
+                "options": null,
+                "display": "datetime",
+                "display_options": {
+                    "relative": true
+                },
+                "readonly": true,
+                "hidden": true,
+                "sort": 6,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "endereco_br",
+            "field": "pesquisa_cep",
+            "type": "string",
+            "schema": {
+                "name": "pesquisa_cep",
+                "table": "endereco_br",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "endereco_br",
+                "field": "pesquisa_cep",
+                "special": null,
+                "interface": "input-autocomplete-api",
+                "options": {
+                    "url": "/pesquisa-cep/{{value}}",
+                    "textPath": "text",
+                    "valuePath": "value",
+                    "rate": 1000,
+                    "placeholder": "Digite o CEP a ser pesquisado"
+                },
+                "display": "formatted-value",
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 7,
+                "width": "full",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Pesquisa de CEP"
+                    }
+                ],
+                "note": "Digite o valor do cep (somente números) e escolha o endereço correspondente.",
+                "conditions": [
+                    {
+                        "name": "Oculta campo",
+                        "rule": {
+                            "_and": [
+                                {
+                                    "cep": {
+                                        "_nnull": true
+                                    }
+                                }
+                            ]
+                        },
+                        "hidden": true,
+                        "options": {
+                            "trigger": "throttle",
+                            "rate": 500,
+                            "font": "sans-serif"
+                        }
+                    }
+                ],
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "endereco_br",
+            "field": "numero",
+            "type": "string",
+            "schema": {
+                "name": "numero",
+                "table": "endereco_br",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "endereco_br",
+                "field": "numero",
+                "special": null,
+                "interface": "input",
+                "options": null,
+                "display": "raw",
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 8,
+                "width": "half",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Número"
+                    }
+                ],
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "endereco_br",
+            "field": "complemento",
+            "type": "string",
+            "schema": {
+                "name": "complemento",
+                "table": "endereco_br",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "endereco_br",
+                "field": "complemento",
+                "special": null,
+                "interface": "input",
+                "options": null,
+                "display": "raw",
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 9,
+                "width": "half",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Complemento"
+                    }
+                ],
+                "note": "Ex: casa, sala, apartamento, etc",
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "endereco_br",
+            "field": "ponto_referencia",
+            "type": "string",
+            "schema": {
+                "name": "ponto_referencia",
+                "table": "endereco_br",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "endereco_br",
+                "field": "ponto_referencia",
+                "special": null,
+                "interface": "input",
+                "options": null,
+                "display": "raw",
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 10,
+                "width": "full",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Ponto de referência"
+                    }
+                ],
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "endereco_br",
+            "field": "notice-pcrmnr",
+            "type": "alias",
+            "schema": null,
+            "meta": {
+                "collection": "endereco_br",
+                "field": "notice-pcrmnr",
+                "special": [
+                    "alias",
+                    "no-data"
+                ],
+                "interface": "presentation-notice",
+                "options": {
+                    "color": "info",
+                    "text": "Para preencher manualmente os campos a seguir, limpe a pesquisa por CEP."
+                },
+                "display": null,
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 11,
+                "width": "full",
+                "translations": null,
+                "note": null,
+                "conditions": [
+                    {
+                        "name": "ocultar apos preenchido",
+                        "rule": {
+                            "_and": [
+                                {
+                                    "_or": [
+                                        {
+                                            "cep": {
+                                                "_nnull": true
+                                            }
+                                        },
+                                        {
+                                            "pesquisa_cep": {
+                                                "_nnull": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "hidden": true,
+                        "options": {
+                            "color": "normal"
+                        }
+                    }
+                ],
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "endereco_br",
+            "field": "logradouro",
+            "type": "string",
+            "schema": {
+                "name": "logradouro",
+                "table": "endereco_br",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "endereco_br",
+                "field": "logradouro",
+                "special": null,
+                "interface": "input",
+                "options": null,
+                "display": "raw",
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 12,
+                "width": "full",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Logradouro"
+                    }
+                ],
+                "note": "Ex: rua, avenida, beco, estrada, etc",
+                "conditions": [
+                    {
+                        "name": "Desabilita campo",
+                        "rule": {
+                            "_and": [
+                                {
+                                    "pesquisa_cep": {
+                                        "_nnull": true
+                                    }
+                                }
+                            ]
+                        },
+                        "hidden": false,
+                        "options": {
+                            "font": "sans-serif",
+                            "trim": false,
+                            "masked": false,
+                            "clear": false,
+                            "slug": false
+                        },
+                        "readonly": true
+                    },
+                    {
+                        "name": "Habilita campo",
+                        "rule": {
+                            "_and": [
+                                {
+                                    "date_created": {
+                                        "_nnull": true
+                                    }
+                                }
+                            ]
+                        },
+                        "hidden": false,
+                        "options": {
+                            "font": "sans-serif",
+                            "trim": false,
+                            "masked": false,
+                            "clear": false,
+                            "slug": false
+                        }
+                    }
+                ],
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "endereco_br",
+            "field": "bairro",
+            "type": "uuid",
+            "schema": {
+                "name": "bairro",
+                "table": "endereco_br",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": "public",
+                "foreign_key_table": "bairro",
+                "foreign_key_column": "id"
+            },
+            "meta": {
+                "collection": "endereco_br",
+                "field": "bairro",
+                "special": [
+                    "m2o"
+                ],
+                "interface": "select-dropdown-m2o",
+                "options": {
+                    "template": "{{nome}},{{cidade.nome}}-{{cidade.estado.sigla}}"
+                },
+                "display": "related-values",
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 13,
+                "width": "full",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Bairro, Cidade - UF"
+                    }
+                ],
+                "note": null,
+                "conditions": [
+                    {
+                        "name": "Desabilita campo",
+                        "rule": {
+                            "_and": [
+                                {
+                                    "pesquisa_cep": {
+                                        "_nnull": true
+                                    }
+                                }
+                            ]
+                        },
+                        "readonly": true,
+                        "options": {
+                            "enableCreate": false,
+                            "enableSelect": true
+                        }
+                    },
+                    {
+                        "name": "Exibe campo",
+                        "rule": {
+                            "_and": [
+                                {
+                                    "date_created": {
+                                        "_nnull": true
+                                    }
+                                }
+                            ]
+                        },
+                        "readonly": false,
+                        "options": {
+                            "enableCreate": false,
+                            "enableSelect": true
+                        }
+                    }
+                ],
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "endereco_br",
+            "field": "cep",
+            "type": "string",
+            "schema": {
+                "name": "cep",
+                "table": "endereco_br",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "endereco_br",
+                "field": "cep",
+                "special": null,
+                "interface": "input",
+                "options": null,
+                "display": "raw",
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 14,
+                "width": "half",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "CEP"
+                    }
+                ],
+                "note": null,
+                "conditions": [
+                    {
+                        "name": "Desabilita campo",
+                        "rule": {
+                            "_and": [
+                                {
+                                    "pesquisa_cep": {
+                                        "_nnull": true
+                                    }
+                                }
+                            ]
+                        },
+                        "hidden": false,
+                        "options": {
+                            "font": "sans-serif",
+                            "trim": false,
+                            "masked": false,
+                            "clear": false,
+                            "slug": false
+                        },
+                        "readonly": true
+                    },
+                    {
+                        "name": "Habilita campo",
+                        "rule": {
+                            "_and": [
+                                {
+                                    "date_created": {
+                                        "_nnull": true
+                                    }
+                                }
+                            ]
+                        },
+                        "hidden": false,
+                        "options": {
+                            "font": "sans-serif",
+                            "trim": false,
+                            "masked": false,
+                            "clear": false,
+                            "slug": false
+                        }
+                    }
+                ],
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "endereco_br",
+            "field": "localizacao",
+            "type": "geometry.Point",
+            "schema": {
+                "name": "localizacao",
+                "table": "endereco_br",
+                "schema": "public",
+                "data_type": "POINT",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "endereco_br",
+                "field": "localizacao",
+                "special": null,
+                "interface": "map",
+                "options": {
+                    "defaultView": {
+                        "center": {
+                            "lng": -40.34860504641142,
+                            "lat": -20.283916142220335
+                        },
+                        "zoom": 10.268362204970376,
+                        "bearing": 0,
+                        "pitch": 0
+                    },
+                    "geometryType": "Point"
+                },
+                "display": "raw",
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 15,
+                "width": "full",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Localização"
+                    }
+                ],
+                "note": null,
+                "conditions": [
+                    {
+                        "name": "ocultar",
+                        "rule": {
+                            "_and": [
+                                {
+                                    "localizacao": {
+                                        "_null": true
+                                    }
+                                }
+                            ]
+                        },
+                        "hidden": true,
+                        "options": {
+                            "defaultView": {
+                                "center": {
+                                    "lng": 0,
+                                    "lat": 0
+                                },
+                                "zoom": 0,
+                                "bearing": 0,
+                                "pitch": 0
+                            },
+                            "geometryType": "Point"
+                        }
+                    }
+                ],
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "bairro",
+            "field": "id",
+            "type": "uuid",
+            "schema": {
+                "name": "id",
+                "table": "bairro",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": false,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": true,
+                "is_primary_key": true,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "bairro",
+                "field": "id",
+                "special": [
+                    "uuid"
+                ],
+                "interface": "input",
+                "options": null,
+                "display": null,
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": 1,
+                "width": "full",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "bairro",
+            "field": "status",
+            "type": "string",
+            "schema": {
+                "name": "status",
+                "table": "bairro",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": false,
+                "generation_expression": null,
+                "default_value": "published",
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "bairro",
+                "field": "status",
+                "special": null,
+                "interface": "select-dropdown",
+                "options": {
+                    "choices": [
+                        {
+                            "text": "Publicado",
+                            "value": "published"
+                        },
+                        {
+                            "text": "Rascunho",
+                            "value": "draft"
+                        }
+                    ]
+                },
+                "display": "labels",
+                "display_options": {
+                    "showAsDot": true,
+                    "choices": [
+                        {
+                            "text": "Publicado",
+                            "value": "published",
+                            "foreground": "#FFFFFF",
+                            "background": "var(--primary)"
+                        },
+                        {
+                            "text": "Rascunho",
+                            "value": "draft",
+                            "foreground": "#18222F",
+                            "background": "#D3DAE4"
+                        }
+                    ]
+                },
+                "readonly": false,
+                "hidden": true,
+                "sort": 2,
+                "width": "full",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "bairro",
+            "field": "user_created",
+            "type": "uuid",
+            "schema": {
+                "name": "user_created",
+                "table": "bairro",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id"
+            },
+            "meta": {
+                "collection": "bairro",
+                "field": "user_created",
+                "special": [
+                    "user-created"
+                ],
+                "interface": "select-dropdown-m2o",
+                "options": {
+                    "template": "{{avatar.$thumbnail}} {{first_name}} {{last_name}}"
+                },
+                "display": "user",
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": 3,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "bairro",
+            "field": "date_created",
+            "type": "timestamp",
+            "schema": {
+                "name": "date_created",
+                "table": "bairro",
+                "schema": "public",
+                "data_type": "timestamp with time zone",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "bairro",
+                "field": "date_created",
+                "special": [
+                    "date-created"
+                ],
+                "interface": "datetime",
+                "options": null,
+                "display": "datetime",
+                "display_options": {
+                    "relative": true
+                },
+                "readonly": true,
+                "hidden": true,
+                "sort": 4,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "bairro",
+            "field": "user_updated",
+            "type": "uuid",
+            "schema": {
+                "name": "user_updated",
+                "table": "bairro",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id"
+            },
+            "meta": {
+                "collection": "bairro",
+                "field": "user_updated",
+                "special": [
+                    "user-updated"
+                ],
+                "interface": "select-dropdown-m2o",
+                "options": {
+                    "template": "{{avatar.$thumbnail}} {{first_name}} {{last_name}}"
+                },
+                "display": "user",
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": 5,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "bairro",
+            "field": "date_updated",
+            "type": "timestamp",
+            "schema": {
+                "name": "date_updated",
+                "table": "bairro",
+                "schema": "public",
+                "data_type": "timestamp with time zone",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "bairro",
+                "field": "date_updated",
+                "special": [
+                    "date-updated"
+                ],
+                "interface": "datetime",
+                "options": null,
+                "display": "datetime",
+                "display_options": {
+                    "relative": true
+                },
+                "readonly": true,
+                "hidden": true,
+                "sort": 6,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "bairro",
+            "field": "nome",
+            "type": "string",
+            "schema": {
+                "name": "nome",
+                "table": "bairro",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": false,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "bairro",
+                "field": "nome",
+                "special": null,
+                "interface": "input",
+                "options": null,
+                "display": "raw",
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 8,
+                "width": "full",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Nome"
+                    }
+                ],
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "bairro",
+            "field": "cidade",
+            "type": "uuid",
+            "schema": {
+                "name": "cidade",
+                "table": "bairro",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": false,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": "public",
+                "foreign_key_table": "cidade",
+                "foreign_key_column": "id"
+            },
+            "meta": {
+                "collection": "bairro",
+                "field": "cidade",
+                "special": [
+                    "m2o"
+                ],
+                "interface": "select-dropdown-m2o",
+                "options": {
+                    "template": "{{nome}} - {{estado.sigla}}",
+                    "filter": {
+                        "_and": [
+                            {
+                                "status": {
+                                    "_eq": "published"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "display": "related-values",
+                "display_options": {
+                    "template": "{{nome}} - {{estado.sigla}}"
+                },
+                "readonly": false,
+                "hidden": false,
+                "sort": 10,
+                "width": "half",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Cidade"
+                    }
+                ],
+                "note": null,
+                "conditions": null,
+                "required": true,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "cidade",
+            "field": "id",
+            "type": "uuid",
+            "schema": {
+                "name": "id",
+                "table": "cidade",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": false,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": true,
+                "is_primary_key": true,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "cidade",
+                "field": "id",
+                "special": [
+                    "uuid"
+                ],
+                "interface": "input",
+                "options": null,
+                "display": null,
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": 1,
+                "width": "full",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "cidade",
+            "field": "status",
+            "type": "string",
+            "schema": {
+                "name": "status",
+                "table": "cidade",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": false,
+                "generation_expression": null,
+                "default_value": "published",
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "cidade",
+                "field": "status",
+                "special": null,
+                "interface": "select-dropdown",
+                "options": {
+                    "choices": [
+                        {
+                            "text": "Publicado",
+                            "value": "published"
+                        },
+                        {
+                            "text": "Rascunho",
+                            "value": "draft"
+                        }
+                    ]
+                },
+                "display": "labels",
+                "display_options": {
+                    "showAsDot": true,
+                    "choices": [
+                        {
+                            "text": "Publicado",
+                            "value": "published",
+                            "foreground": "#FFFFFF",
+                            "background": "var(--primary)"
+                        },
+                        {
+                            "text": "Rascunho",
+                            "value": "draft",
+                            "foreground": "#18222F",
+                            "background": "#D3DAE4"
+                        }
+                    ]
+                },
+                "readonly": false,
+                "hidden": true,
+                "sort": 2,
+                "width": "full",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "cidade",
+            "field": "user_created",
+            "type": "uuid",
+            "schema": {
+                "name": "user_created",
+                "table": "cidade",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id"
+            },
+            "meta": {
+                "collection": "cidade",
+                "field": "user_created",
+                "special": [
+                    "user-created"
+                ],
+                "interface": "select-dropdown-m2o",
+                "options": {
+                    "template": "{{avatar.$thumbnail}} {{first_name}} {{last_name}}"
+                },
+                "display": "user",
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": 3,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "cidade",
+            "field": "date_created",
+            "type": "timestamp",
+            "schema": {
+                "name": "date_created",
+                "table": "cidade",
+                "schema": "public",
+                "data_type": "timestamp with time zone",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "cidade",
+                "field": "date_created",
+                "special": [
+                    "date-created"
+                ],
+                "interface": "datetime",
+                "options": null,
+                "display": "datetime",
+                "display_options": {
+                    "relative": true
+                },
+                "readonly": true,
+                "hidden": true,
+                "sort": 4,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "cidade",
+            "field": "user_updated",
+            "type": "uuid",
+            "schema": {
+                "name": "user_updated",
+                "table": "cidade",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id"
+            },
+            "meta": {
+                "collection": "cidade",
+                "field": "user_updated",
+                "special": [
+                    "user-updated"
+                ],
+                "interface": "select-dropdown-m2o",
+                "options": {
+                    "template": "{{avatar.$thumbnail}} {{first_name}} {{last_name}}"
+                },
+                "display": "user",
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": 5,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "cidade",
+            "field": "date_updated",
+            "type": "timestamp",
+            "schema": {
+                "name": "date_updated",
+                "table": "cidade",
+                "schema": "public",
+                "data_type": "timestamp with time zone",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "cidade",
+                "field": "date_updated",
+                "special": [
+                    "date-updated"
+                ],
+                "interface": "datetime",
+                "options": null,
+                "display": "datetime",
+                "display_options": {
+                    "relative": true
+                },
+                "readonly": true,
+                "hidden": true,
+                "sort": 6,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "cidade",
+            "field": "nome",
+            "type": "string",
+            "schema": {
+                "name": "nome",
+                "table": "cidade",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": true,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "cidade",
+                "field": "nome",
+                "special": null,
+                "interface": "input",
+                "options": null,
+                "display": "raw",
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 8,
+                "width": "full",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Nome"
+                    }
+                ],
+                "note": null,
+                "conditions": null,
+                "required": true,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "cidade",
+            "field": "codigo_ibge",
+            "type": "string",
+            "schema": {
+                "name": "codigo_ibge",
+                "table": "cidade",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": true,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "cidade",
+                "field": "codigo_ibge",
+                "special": null,
+                "interface": "input",
+                "options": null,
+                "display": "raw",
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 9,
+                "width": "half",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Código do IBGE"
+                    }
+                ],
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "cidade",
+            "field": "bairros",
+            "type": "alias",
+            "schema": null,
+            "meta": {
+                "collection": "cidade",
+                "field": "bairros",
+                "special": [
+                    "o2m"
+                ],
+                "interface": "list-o2m",
+                "options": {
+                    "template": "{{nome}}",
+                    "filter": {
+                        "_and": [
+                            {
+                                "status": {
+                                    "_eq": "published"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "display": "related-values",
+                "display_options": {
+                    "template": "{{nome}}"
+                },
+                "readonly": false,
+                "hidden": false,
+                "sort": 10,
+                "width": "fill",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Bairros"
+                    }
+                ],
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "cidade",
+            "field": "estado",
+            "type": "uuid",
+            "schema": {
+                "name": "estado",
+                "table": "cidade",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": "public",
+                "foreign_key_table": "estado",
+                "foreign_key_column": "id"
+            },
+            "meta": {
+                "collection": "cidade",
+                "field": "estado",
+                "special": [
+                    "m2o"
+                ],
+                "interface": "select-dropdown-m2o",
+                "options": {
+                    "template": "{{sigla}}",
+                    "filter": {
+                        "_and": [
+                            {
+                                "status": {
+                                    "_eq": "published"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "display": "related-values",
+                "display_options": {
+                    "template": "{{sigla}}"
+                },
+                "readonly": false,
+                "hidden": false,
+                "sort": 11,
+                "width": "half",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Estado (UF)"
+                    }
+                ],
+                "note": null,
+                "conditions": null,
+                "required": true,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "estado",
+            "field": "id",
+            "type": "uuid",
+            "schema": {
+                "name": "id",
+                "table": "estado",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": false,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": true,
+                "is_primary_key": true,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "estado",
+                "field": "id",
+                "special": [
+                    "uuid"
+                ],
+                "interface": "input",
+                "options": null,
+                "display": null,
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": 1,
+                "width": "full",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "estado",
+            "field": "status",
+            "type": "string",
+            "schema": {
+                "name": "status",
+                "table": "estado",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": false,
+                "generation_expression": null,
+                "default_value": "published",
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "estado",
+                "field": "status",
+                "special": null,
+                "interface": "select-dropdown",
+                "options": {
+                    "choices": [
+                        {
+                            "text": "Publicado",
+                            "value": "published"
+                        },
+                        {
+                            "text": "Rascunho",
+                            "value": "draft"
+                        }
+                    ]
+                },
+                "display": "labels",
+                "display_options": {
+                    "showAsDot": true,
+                    "choices": [
+                        {
+                            "text": "Publicado",
+                            "value": "published",
+                            "foreground": "#FFFFFF",
+                            "background": "var(--primary)"
+                        },
+                        {
+                            "text": "Rascunho",
+                            "value": "draft",
+                            "foreground": "#18222F",
+                            "background": "#D3DAE4"
+                        }
+                    ]
+                },
+                "readonly": false,
+                "hidden": true,
+                "sort": 2,
+                "width": "full",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "estado",
+            "field": "user_created",
+            "type": "uuid",
+            "schema": {
+                "name": "user_created",
+                "table": "estado",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id"
+            },
+            "meta": {
+                "collection": "estado",
+                "field": "user_created",
+                "special": [
+                    "user-created"
+                ],
+                "interface": "select-dropdown-m2o",
+                "options": {
+                    "template": "{{avatar.$thumbnail}} {{first_name}} {{last_name}}"
+                },
+                "display": "user",
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": 3,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "estado",
+            "field": "date_created",
+            "type": "timestamp",
+            "schema": {
+                "name": "date_created",
+                "table": "estado",
+                "schema": "public",
+                "data_type": "timestamp with time zone",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "estado",
+                "field": "date_created",
+                "special": [
+                    "date-created"
+                ],
+                "interface": "datetime",
+                "options": null,
+                "display": "datetime",
+                "display_options": {
+                    "relative": true
+                },
+                "readonly": true,
+                "hidden": true,
+                "sort": 4,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "estado",
+            "field": "user_updated",
+            "type": "uuid",
+            "schema": {
+                "name": "user_updated",
+                "table": "estado",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id"
+            },
+            "meta": {
+                "collection": "estado",
+                "field": "user_updated",
+                "special": [
+                    "user-updated"
+                ],
+                "interface": "select-dropdown-m2o",
+                "options": {
+                    "template": "{{avatar.$thumbnail}} {{first_name}} {{last_name}}"
+                },
+                "display": "user",
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": 5,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "estado",
+            "field": "date_updated",
+            "type": "timestamp",
+            "schema": {
+                "name": "date_updated",
+                "table": "estado",
+                "schema": "public",
+                "data_type": "timestamp with time zone",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "estado",
+                "field": "date_updated",
+                "special": [
+                    "date-updated"
+                ],
+                "interface": "datetime",
+                "options": null,
+                "display": "datetime",
+                "display_options": {
+                    "relative": true
+                },
+                "readonly": true,
+                "hidden": true,
+                "sort": 6,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "estado",
+            "field": "nome",
+            "type": "string",
+            "schema": {
+                "name": "nome",
+                "table": "estado",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": true,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "estado",
+                "field": "nome",
+                "special": null,
+                "interface": "input",
+                "options": null,
+                "display": "raw",
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 7,
+                "width": "full",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Nome"
+                    }
+                ],
+                "note": null,
+                "conditions": null,
+                "required": true,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "estado",
+            "field": "sigla",
+            "type": "string",
+            "schema": {
+                "name": "sigla",
+                "table": "estado",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": 2,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "estado",
+                "field": "sigla",
+                "special": null,
+                "interface": "input",
+                "options": null,
+                "display": "raw",
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 8,
+                "width": "half",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Sigla"
+                    }
+                ],
+                "note": null,
+                "conditions": null,
+                "required": true,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "estado",
+            "field": "codigo_ibge",
+            "type": "string",
+            "schema": {
+                "name": "codigo_ibge",
+                "table": "estado",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": true,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "estado",
+                "field": "codigo_ibge",
+                "special": null,
+                "interface": "input",
+                "options": null,
+                "display": "raw",
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 9,
+                "width": "half",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Código do IBGE"
+                    }
+                ],
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "estado",
+            "field": "cidades",
+            "type": "alias",
+            "schema": null,
+            "meta": {
+                "collection": "estado",
+                "field": "cidades",
+                "special": [
+                    "o2m"
+                ],
+                "interface": "list-o2m",
+                "options": {
+                    "template": "{{nome}}"
+                },
+                "display": "related-values",
+                "display_options": {
+                    "template": "{{nome}}"
+                },
+                "readonly": false,
+                "hidden": false,
+                "sort": 10,
+                "width": "full",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Cidades"
+                    }
+                ],
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "estado",
+            "field": "pais",
+            "type": "uuid",
+            "schema": {
+                "name": "pais",
+                "table": "estado",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": "public",
+                "foreign_key_table": "pais",
+                "foreign_key_column": "id"
+            },
+            "meta": {
+                "collection": "estado",
+                "field": "pais",
+                "special": [
+                    "m2o"
+                ],
+                "interface": "select-dropdown-m2o",
+                "options": {
+                    "template": "{{nome}}"
+                },
+                "display": "related-values",
+                "display_options": {
+                    "template": "{{nome}}"
+                },
+                "readonly": false,
+                "hidden": false,
+                "sort": 11,
+                "width": "half",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "País"
+                    }
+                ],
+                "note": null,
+                "conditions": null,
+                "required": true,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "pais",
+            "field": "id",
+            "type": "uuid",
+            "schema": {
+                "name": "id",
+                "table": "pais",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": false,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": true,
+                "is_primary_key": true,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "pais",
+                "field": "id",
+                "special": [
+                    "uuid"
+                ],
+                "interface": "input",
+                "options": null,
+                "display": null,
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": 1,
+                "width": "full",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "pais",
+            "field": "status",
+            "type": "string",
+            "schema": {
+                "name": "status",
+                "table": "pais",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": false,
+                "generation_expression": null,
+                "default_value": "published",
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "pais",
+                "field": "status",
+                "special": null,
+                "interface": "select-dropdown",
+                "options": {
+                    "choices": [
+                        {
+                            "text": "Publicado",
+                            "value": "published"
+                        },
+                        {
+                            "text": "Rascunho",
+                            "value": "draft"
+                        }
+                    ]
+                },
+                "display": "labels",
+                "display_options": {
+                    "showAsDot": true,
+                    "choices": [
+                        {
+                            "text": "Publicado",
+                            "value": "published",
+                            "foreground": "#FFFFFF",
+                            "background": "var(--primary)"
+                        },
+                        {
+                            "text": "Rascunho",
+                            "value": "draft",
+                            "foreground": "#18222F",
+                            "background": "#D3DAE4"
+                        }
+                    ]
+                },
+                "readonly": false,
+                "hidden": true,
+                "sort": 2,
+                "width": "full",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "pais",
+            "field": "user_created",
+            "type": "uuid",
+            "schema": {
+                "name": "user_created",
+                "table": "pais",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id"
+            },
+            "meta": {
+                "collection": "pais",
+                "field": "user_created",
+                "special": [
+                    "user-created"
+                ],
+                "interface": "select-dropdown-m2o",
+                "options": {
+                    "template": "{{avatar.$thumbnail}} {{first_name}} {{last_name}}"
+                },
+                "display": "user",
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": 3,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "pais",
+            "field": "date_created",
+            "type": "timestamp",
+            "schema": {
+                "name": "date_created",
+                "table": "pais",
+                "schema": "public",
+                "data_type": "timestamp with time zone",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "pais",
+                "field": "date_created",
+                "special": [
+                    "date-created"
+                ],
+                "interface": "datetime",
+                "options": null,
+                "display": "datetime",
+                "display_options": {
+                    "relative": true
+                },
+                "readonly": true,
+                "hidden": true,
+                "sort": 4,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "pais",
+            "field": "user_updated",
+            "type": "uuid",
+            "schema": {
+                "name": "user_updated",
+                "table": "pais",
+                "schema": "public",
+                "data_type": "uuid",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id"
+            },
+            "meta": {
+                "collection": "pais",
+                "field": "user_updated",
+                "special": [
+                    "user-updated"
+                ],
+                "interface": "select-dropdown-m2o",
+                "options": {
+                    "template": "{{avatar.$thumbnail}} {{first_name}} {{last_name}}"
+                },
+                "display": "user",
+                "display_options": null,
+                "readonly": true,
+                "hidden": true,
+                "sort": 5,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "pais",
+            "field": "date_updated",
+            "type": "timestamp",
+            "schema": {
+                "name": "date_updated",
+                "table": "pais",
+                "schema": "public",
+                "data_type": "timestamp with time zone",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": null,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "pais",
+                "field": "date_updated",
+                "special": [
+                    "date-updated"
+                ],
+                "interface": "datetime",
+                "options": null,
+                "display": "datetime",
+                "display_options": {
+                    "relative": true
+                },
+                "readonly": true,
+                "hidden": true,
+                "sort": 6,
+                "width": "half",
+                "translations": null,
+                "note": null,
+                "conditions": null,
+                "required": false,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "pais",
+            "field": "nome",
+            "type": "string",
+            "schema": {
+                "name": "nome",
+                "table": "pais",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": 255,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": true,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "pais",
+                "field": "nome",
+                "special": null,
+                "interface": "input",
+                "options": null,
+                "display": "raw",
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 8,
+                "width": "full",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Nome"
+                    }
+                ],
+                "note": null,
+                "conditions": null,
+                "required": true,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "pais",
+            "field": "sigla",
+            "type": "string",
+            "schema": {
+                "name": "sigla",
+                "table": "pais",
+                "schema": "public",
+                "data_type": "character varying",
+                "is_nullable": true,
+                "generation_expression": null,
+                "default_value": null,
+                "is_generated": false,
+                "max_length": 3,
+                "comment": null,
+                "numeric_precision": null,
+                "numeric_scale": null,
+                "is_unique": false,
+                "is_primary_key": false,
+                "has_auto_increment": false,
+                "foreign_key_schema": null,
+                "foreign_key_table": null,
+                "foreign_key_column": null
+            },
+            "meta": {
+                "collection": "pais",
+                "field": "sigla",
+                "special": null,
+                "interface": "input",
+                "options": null,
+                "display": "raw",
+                "display_options": null,
+                "readonly": false,
+                "hidden": false,
+                "sort": 9,
+                "width": "half",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Sigla"
+                    }
+                ],
+                "note": null,
+                "conditions": null,
+                "required": true,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        },
+        {
+            "collection": "pais",
+            "field": "estados",
+            "type": "alias",
+            "schema": null,
+            "meta": {
+                "collection": "pais",
+                "field": "estados",
+                "special": [
+                    "o2m"
+                ],
+                "interface": "list-o2m",
+                "options": {
+                    "template": "{{sigla}} - {{nome}}",
+                    "filter": {
+                        "_and": [
+                            {
+                                "status": {
+                                    "_eq": "published"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "display": "related-values",
+                "display_options": {
+                    "template": "{{sigla}} - {{nome}}"
+                },
+                "readonly": false,
+                "hidden": false,
+                "sort": 11,
+                "width": "full",
+                "translations": [
+                    {
+                        "language": "pt-BR",
+                        "translation": "Estados (UF)"
+                    }
+                ],
+                "note": null,
+                "conditions": null,
+                "required": true,
+                "group": null,
+                "validation": null,
+                "validation_message": null
+            }
+        }
+    ],
+    "relations": [
+        {
+            "collection": "endereco_br",
+            "field": "bairro",
+            "related_collection": "bairro",
+            "schema": {
+                "constraint_name": "endereco_br_bairro_foreign",
+                "table": "endereco_br",
+                "column": "bairro",
+                "foreign_key_schema": "public",
+                "foreign_key_table": "bairro",
+                "foreign_key_column": "id",
+                "on_update": "NO ACTION",
+                "on_delete": "SET NULL"
+            },
+            "meta": {
+                "many_collection": "endereco_br",
+                "many_field": "bairro",
+                "one_collection": "bairro",
+                "one_field": null,
+                "one_collection_field": null,
+                "one_allowed_collections": null,
+                "junction_field": null,
+                "sort_field": null,
+                "one_deselect_action": "nullify"
+            }
+        },
+        {
+            "collection": "endereco_br",
+            "field": "user_created",
+            "related_collection": "directus_users",
+            "schema": {
+                "constraint_name": "endereco_br_user_created_foreign",
+                "table": "endereco_br",
+                "column": "user_created",
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id",
+                "on_update": "NO ACTION",
+                "on_delete": "NO ACTION"
+            },
+            "meta": {
+                "many_collection": "endereco_br",
+                "many_field": "user_created",
+                "one_collection": "directus_users",
+                "one_field": null,
+                "one_collection_field": null,
+                "one_allowed_collections": null,
+                "junction_field": null,
+                "sort_field": null,
+                "one_deselect_action": "nullify"
+            }
+        },
+        {
+            "collection": "endereco_br",
+            "field": "user_updated",
+            "related_collection": "directus_users",
+            "schema": {
+                "constraint_name": "endereco_br_user_updated_foreign",
+                "table": "endereco_br",
+                "column": "user_updated",
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id",
+                "on_update": "NO ACTION",
+                "on_delete": "NO ACTION"
+            },
+            "meta": {
+                "many_collection": "endereco_br",
+                "many_field": "user_updated",
+                "one_collection": "directus_users",
+                "one_field": null,
+                "one_collection_field": null,
+                "one_allowed_collections": null,
+                "junction_field": null,
+                "sort_field": null,
+                "one_deselect_action": "nullify"
+            }
+        },
+        {
+            "collection": "bairro",
+            "field": "cidade",
+            "related_collection": "cidade",
+            "schema": {
+                "constraint_name": "bairro_cidade_foreign",
+                "table": "bairro",
+                "column": "cidade",
+                "foreign_key_schema": "public",
+                "foreign_key_table": "cidade",
+                "foreign_key_column": "id",
+                "on_update": "NO ACTION",
+                "on_delete": "NO ACTION"
+            },
+            "meta": {
+                "many_collection": "bairro",
+                "many_field": "cidade",
+                "one_collection": "cidade",
+                "one_field": "bairros",
+                "one_collection_field": null,
+                "one_allowed_collections": null,
+                "junction_field": null,
+                "sort_field": null,
+                "one_deselect_action": "nullify"
+            }
+        },
+        {
+            "collection": "bairro",
+            "field": "user_created",
+            "related_collection": "directus_users",
+            "schema": {
+                "constraint_name": "bairro_user_created_foreign",
+                "table": "bairro",
+                "column": "user_created",
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id",
+                "on_update": "NO ACTION",
+                "on_delete": "NO ACTION"
+            },
+            "meta": {
+                "many_collection": "bairro",
+                "many_field": "user_created",
+                "one_collection": "directus_users",
+                "one_field": null,
+                "one_collection_field": null,
+                "one_allowed_collections": null,
+                "junction_field": null,
+                "sort_field": null,
+                "one_deselect_action": "nullify"
+            }
+        },
+        {
+            "collection": "bairro",
+            "field": "user_updated",
+            "related_collection": "directus_users",
+            "schema": {
+                "constraint_name": "bairro_user_updated_foreign",
+                "table": "bairro",
+                "column": "user_updated",
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id",
+                "on_update": "NO ACTION",
+                "on_delete": "NO ACTION"
+            },
+            "meta": {
+                "many_collection": "bairro",
+                "many_field": "user_updated",
+                "one_collection": "directus_users",
+                "one_field": null,
+                "one_collection_field": null,
+                "one_allowed_collections": null,
+                "junction_field": null,
+                "sort_field": null,
+                "one_deselect_action": "nullify"
+            }
+        },
+        {
+            "collection": "cidade",
+            "field": "estado",
+            "related_collection": "estado",
+            "schema": {
+                "constraint_name": "cidade_estado_foreign",
+                "table": "cidade",
+                "column": "estado",
+                "foreign_key_schema": "public",
+                "foreign_key_table": "estado",
+                "foreign_key_column": "id",
+                "on_update": "NO ACTION",
+                "on_delete": "NO ACTION"
+            },
+            "meta": {
+                "many_collection": "cidade",
+                "many_field": "estado",
+                "one_collection": "estado",
+                "one_field": "cidades",
+                "one_collection_field": null,
+                "one_allowed_collections": null,
+                "junction_field": null,
+                "sort_field": null,
+                "one_deselect_action": "nullify"
+            }
+        },
+        {
+            "collection": "cidade",
+            "field": "user_created",
+            "related_collection": "directus_users",
+            "schema": {
+                "constraint_name": "cidade_user_created_foreign",
+                "table": "cidade",
+                "column": "user_created",
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id",
+                "on_update": "NO ACTION",
+                "on_delete": "NO ACTION"
+            },
+            "meta": {
+                "many_collection": "cidade",
+                "many_field": "user_created",
+                "one_collection": "directus_users",
+                "one_field": null,
+                "one_collection_field": null,
+                "one_allowed_collections": null,
+                "junction_field": null,
+                "sort_field": null,
+                "one_deselect_action": "nullify"
+            }
+        },
+        {
+            "collection": "cidade",
+            "field": "user_updated",
+            "related_collection": "directus_users",
+            "schema": {
+                "constraint_name": "cidade_user_updated_foreign",
+                "table": "cidade",
+                "column": "user_updated",
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id",
+                "on_update": "NO ACTION",
+                "on_delete": "NO ACTION"
+            },
+            "meta": {
+                "many_collection": "cidade",
+                "many_field": "user_updated",
+                "one_collection": "directus_users",
+                "one_field": null,
+                "one_collection_field": null,
+                "one_allowed_collections": null,
+                "junction_field": null,
+                "sort_field": null,
+                "one_deselect_action": "nullify"
+            }
+        },
+        {
+            "collection": "estado",
+            "field": "pais",
+            "related_collection": "pais",
+            "schema": {
+                "constraint_name": "estado_pais_foreign",
+                "table": "estado",
+                "column": "pais",
+                "foreign_key_schema": "public",
+                "foreign_key_table": "pais",
+                "foreign_key_column": "id",
+                "on_update": "NO ACTION",
+                "on_delete": "NO ACTION"
+            },
+            "meta": {
+                "many_collection": "estado",
+                "many_field": "pais",
+                "one_collection": "pais",
+                "one_field": "estados",
+                "one_collection_field": null,
+                "one_allowed_collections": null,
+                "junction_field": null,
+                "sort_field": null,
+                "one_deselect_action": "nullify"
+            }
+        },
+        {
+            "collection": "estado",
+            "field": "user_created",
+            "related_collection": "directus_users",
+            "schema": {
+                "constraint_name": "estado_user_created_foreign",
+                "table": "estado",
+                "column": "user_created",
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id",
+                "on_update": "NO ACTION",
+                "on_delete": "NO ACTION"
+            },
+            "meta": {
+                "many_collection": "estado",
+                "many_field": "user_created",
+                "one_collection": "directus_users",
+                "one_field": null,
+                "one_collection_field": null,
+                "one_allowed_collections": null,
+                "junction_field": null,
+                "sort_field": null,
+                "one_deselect_action": "nullify"
+            }
+        },
+        {
+            "collection": "estado",
+            "field": "user_updated",
+            "related_collection": "directus_users",
+            "schema": {
+                "constraint_name": "estado_user_updated_foreign",
+                "table": "estado",
+                "column": "user_updated",
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id",
+                "on_update": "NO ACTION",
+                "on_delete": "NO ACTION"
+            },
+            "meta": {
+                "many_collection": "estado",
+                "many_field": "user_updated",
+                "one_collection": "directus_users",
+                "one_field": null,
+                "one_collection_field": null,
+                "one_allowed_collections": null,
+                "junction_field": null,
+                "sort_field": null,
+                "one_deselect_action": "nullify"
+            }
+        },
+        {
+            "collection": "pais",
+            "field": "user_created",
+            "related_collection": "directus_users",
+            "schema": {
+                "constraint_name": "pais_user_created_foreign",
+                "table": "pais",
+                "column": "user_created",
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id",
+                "on_update": "NO ACTION",
+                "on_delete": "NO ACTION"
+            },
+            "meta": {
+                "many_collection": "pais",
+                "many_field": "user_created",
+                "one_collection": "directus_users",
+                "one_field": null,
+                "one_collection_field": null,
+                "one_allowed_collections": null,
+                "junction_field": null,
+                "sort_field": null,
+                "one_deselect_action": "nullify"
+            }
+        },
+        {
+            "collection": "pais",
+            "field": "user_updated",
+            "related_collection": "directus_users",
+            "schema": {
+                "constraint_name": "pais_user_updated_foreign",
+                "table": "pais",
+                "column": "user_updated",
+                "foreign_key_schema": "public",
+                "foreign_key_table": "directus_users",
+                "foreign_key_column": "id",
+                "on_update": "NO ACTION",
+                "on_delete": "NO ACTION"
+            },
+            "meta": {
+                "many_collection": "pais",
+                "many_field": "user_updated",
+                "one_collection": "directus_users",
+                "one_field": null,
+                "one_collection_field": null,
+                "one_allowed_collections": null,
+                "junction_field": null,
+                "sort_field": null,
+                "one_deselect_action": "nullify"
+            }
+        }
+    ]
+}
