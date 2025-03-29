@@ -41,14 +41,25 @@
 		"link": "directus-extension link",
 		"add": "directus-extension add",
 		"postbuild": "cp ./files/* ./dist/",
-		"predev": "cp ./files/* ./dist/"
+		"predev": "cp ./files/* ./dist/",
+		"typecheck": "tsc --noEmit",
+		"lint": "eslint \"src/**/*.{ts,vue}\"",
+		"lint:fix": "eslint \"src/**/*.{ts,vue}\" --fix",
+		"format": "prettier --write src/"
 	},
 	"devDependencies": {
 		"@directus/api": "^17.1.0",
 		"@directus/extensions-sdk": "10.3.4",
 		"@types/node": "^20.11.25",
+		"@typescript-eslint/eslint-plugin": "^8.28.0",
+		"@typescript-eslint/parser": "^8.28.0",
+		"eslint": "^9.23.0",
+		"eslint-config-prettier": "^10.1.1",
+		"eslint-plugin-vue": "^10.0.0",
+		"prettier": "^3.5.3",
 		"tsup": "^8.0.2",
-		"typescript": "^5.4.2"
+		"typescript": "^5.4.2",
+		"vue-eslint-parser": "^10.1.1"
 	},
 	"dependencies": {
 		"axios": "^1.6.7"
@@ -56,5 +67,18 @@
 	"files": [
 		"dist/",
 		"package.json"
-	]
+	],
+	"prettier": {
+		"singleQuote": true,
+		"trailingComma": "es5",
+		"printWidth": 100,
+		"semi": true,
+		"tabWidth": 2
+	},
+	"lint-staged": {
+		"*.{ts,vue}": [
+			"eslint --fix",
+			"prettier --write"
+		]
+	}
 }

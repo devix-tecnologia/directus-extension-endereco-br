@@ -1,6 +1,5 @@
 import { defineEndpoint } from '@directus/extensions-sdk';
-import { ObterDadosViaCep } from '../services/viacep'
-
+import { ObterDadosViaCep } from '../services/viacep';
 
 export default defineEndpoint((router, context) => {
   router.get('/:cep', async (req, res) => {
@@ -11,7 +10,10 @@ export default defineEndpoint((router, context) => {
 
     if (cepLimpo.length !== 8) {
       res.status(400);
-      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+      res.setHeader(
+        'Cache-Control',
+        'no-store, no-cache, must-revalidate, post-check=0, pre-check=0'
+      );
       res.setHeader('Pragma', 'no-cache');
       res.setHeader('Expires', '0');
       res.send('Valor de CEP invalido.');
@@ -32,7 +34,9 @@ export default defineEndpoint((router, context) => {
       context.logger.error(error);
 
       res.status(200);
-      res.json([{ text: 'Serviço indisponível no momento. Tente novamente mais tarde.', value: undefined }]);
+      res.json([
+        { text: 'Serviço indisponível no momento. Tente novamente mais tarde.', value: undefined },
+      ]);
     }
   });
 });
