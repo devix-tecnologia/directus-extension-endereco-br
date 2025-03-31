@@ -48,8 +48,10 @@
 		"format": "prettier --write src/"
 	},
 	"devDependencies": {
-		"@directus/api": "^17.1.0",
-		"@directus/extensions-sdk": "10.3.4",
+		"@directus/api": "^26.0.0",
+		"@directus/extensions-sdk": "^13.0.4",
+		"@directus/tsconfig": "^3.0.0",
+		"@directus/types": "^13.1.0",
 		"@types/node": "^20.11.25",
 		"@typescript-eslint/eslint-plugin": "^8.28.0",
 		"@typescript-eslint/parser": "^8.28.0",
@@ -58,10 +60,12 @@
 		"eslint-plugin-vue": "^10.0.0",
 		"prettier": "^3.5.3",
 		"tsup": "^8.0.2",
-		"typescript": "^5.4.2",
+		"typescript": "^5.8.2",
 		"vue-eslint-parser": "^10.1.1"
 	},
 	"dependencies": {
+		"@directus/errors": "^2.0.1",
+		"@directus/extensions": "^3.0.4",
 		"axios": "^1.6.7"
 	},
 	"files": [

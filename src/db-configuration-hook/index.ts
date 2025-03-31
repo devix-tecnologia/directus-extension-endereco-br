@@ -5,7 +5,7 @@ import {
   Collection,
   Field,
   Relation,
-  SchemaOverview
+  SchemaOverview,
 } from '../utils/DirectusImports';
 
 interface ConfiguracaoSchema {
@@ -23,30 +23,31 @@ interface DirectusError extends Error {
 
 export default defineHook(({ init }, { services, database, getSchema }) => {
   const { CollectionsService, RelationsService } = services;
-  
+
   init('routes.custom.after', async () => {
     try {
-      const configuracaoSchema = JSON.parse(readInnerFile('state.json').toString()) as ConfiguracaoSchema;
+      const configuracaoSchema = JSON.parse(
+        readInnerFile('state.json').toString()
+      ) as ConfiguracaoSchema;
       const esquema = await getSchema();
-      
+
       // Processa as coleções, se existirem
       if (configuracaoSchema.collections) {
         await processarColecoes(configuracaoSchema, esquema);
       }
-      
+
       // Processa as relações, se existirem
       if (configuracaoSchema.relations) {
         await processarRelacoes(configuracaoSchema, esquema);
       }
-      
+
       // Cadastra dados iniciais, se necessário
       await cadastrarDadosIniciais(esquema);
-      
     } catch (erro) {
       console.error('Erro no hook de inicialização de estado:', erro);
     }
   });
-  
+
   /**
    * Verifica se um erro é do tipo "não encontrado" ou "sem permissão"
    */
@@ -60,34 +61,39 @@ export default defineHook(({ init }, { services, database, getSchema }) => {
       if (directusError.code === 'NOT_FOUND' || directusError.status === 404) {
         return true;
       }
-      
+
       // Como fallback, podemos verificar a mensagem, mas apenas para casos específicos
-      if (directusError.message && 
-         (directusError.message.includes("permission") || 
-          directusError.message.includes("not found") ||
-          directusError.message.includes("does not exist"))) {
+      if (
+        directusError.message &&
+        (directusError.message.includes('permission') ||
+          directusError.message.includes('not found') ||
+          directusError.message.includes('does not exist'))
+      ) {
         return true;
       }
     }
     return false;
   }
-  
+
   /**
    * Processa as coleções do arquivo de configuração
    */
-  async function processarColecoes(config: ConfiguracaoSchema, esquema: SchemaOverview): Promise<void> {
+  async function processarColecoes(
+    config: ConfiguracaoSchema,
+    esquema: SchemaOverview
+  ): Promise<void> {
     const servicoColecoes = new CollectionsService({
       knex: database,
       schema: esquema,
     });
-    
+
     const colecoes = normalizarArray(config.collections);
-    
+
     // Ordena coleções para garantir que pastas sejam criadas antes das coleções contidas
-    const colecoesComGrupo = colecoes.filter(col => col.meta?.group !== null);
-    const colecoesSemGrupo = colecoes.filter(col => col.meta?.group == null);
+    const colecoesComGrupo = colecoes.filter((col) => col.meta?.group !== null);
+    const colecoesSemGrupo = colecoes.filter((col) => col.meta?.group == null);
     const colecoesOrdenadas = [...colecoesSemGrupo, ...colecoesComGrupo];
-    
+
     for (const colecao of colecoesOrdenadas) {
       try {
         // Tenta verificar se a coleção já existe
@@ -98,9 +104,10 @@ export default defineHook(({ init }, { services, database, getSchema }) => {
         if (isNotFoundOrForbiddenError(erro)) {
           try {
             // Obtém os campos para esta coleção
-            const campos = normalizarArray(config.fields)
-              .filter(campo => campo.collection === colecao.collection);
-            
+            const campos = normalizarArray(config.fields).filter(
+              (campo) => campo.collection === colecao.collection
+            );
+
             // Cria a coleção com seus campos
             await servicoColecoes.createOne(
               { ...colecao, fields: campos },
@@ -119,18 +126,21 @@ export default defineHook(({ init }, { services, database, getSchema }) => {
       }
     }
   }
-  
+
   /**
    * Processa as relações do arquivo de configuração
    */
-  async function processarRelacoes(config: ConfiguracaoSchema, _esquema: SchemaOverview): Promise<void> {
+  async function processarRelacoes(
+    config: ConfiguracaoSchema,
+    _esquema: SchemaOverview
+  ): Promise<void> {
     const servicoRelacoes = new RelationsService({
       knex: database,
       schema: await getSchema({ database }),
     });
-    
+
     const relacoes = normalizarArray(config.relations);
-    
+
     for (const relacao of relacoes) {
       try {
         // Tenta verificar se a relação já existe
@@ -146,7 +156,10 @@ export default defineHook(({ init }, { services, database, getSchema }) => {
             });
             console.log(`Relação ${relacao.collection}.${relacao.field} criada com sucesso.`);
           } catch (erroCreate) {
-            console.error(`Erro ao criar relação ${relacao.collection}.${relacao.field}:`, erroCreate);
+            console.error(
+              `Erro ao criar relação ${relacao.collection}.${relacao.field}:`,
+              erroCreate
+            );
             throw erroCreate;
           }
         } else {
@@ -157,7 +170,7 @@ export default defineHook(({ init }, { services, database, getSchema }) => {
       }
     }
   }
-  
+
   /**
    * Cadastra dados iniciais se necessário
    */
@@ -166,13 +179,13 @@ export default defineHook(({ init }, { services, database, getSchema }) => {
       knex: database,
       schema: esquema,
     });
-    
+
     try {
       const itens = await servicoPais.readByQuery({
         fields: ['id'],
-        limit: 1 // Otimização: só precisamos saber se existe pelo menos um registro
+        limit: 1, // Otimização: só precisamos saber se existe pelo menos um registro
       });
-      
+
       // Apenas cadastra se não houver registros
       if (itens.length === 0) {
         const dadosIniciais = JSON.parse(readInnerFile('seed.json').toString());
@@ -186,7 +199,7 @@ export default defineHook(({ init }, { services, database, getSchema }) => {
       throw erro;
     }
   }
-  
+
   /**
    * Função auxiliar para normalizar dados em arrays
    */
