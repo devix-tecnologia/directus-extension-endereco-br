@@ -1,8 +1,1 @@
-onlyBuiltDependencies:
-  - argon2
-  - esbuild
-  - isolated-vm
-  - oracledb
-  - sharp
-  - sqlite3
-  - vue-demi
+# Arquivo removido pois este projeto não é um monorepo.
