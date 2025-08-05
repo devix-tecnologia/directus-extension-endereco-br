@@ -1,4 +1,4 @@
-import { PrimaryKey } from './DirectusImports';
+import { PrimaryKey } from './DirectusImports.js';
 
 export type Bairro = {
   id: string;

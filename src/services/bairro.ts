@@ -2,8 +2,8 @@ import {
   AbstractServiceOptions,
   ApiExtensionContext,
   ItemsService,
-} from '../utils/DirectusImports';
-import { Bairro, Cidade, Estado } from '../utils/types';
+} from '../utils/DirectusImports.js';
+import { Bairro, Cidade, Estado } from '../utils/types.js';
 
 export class BairroService {
   ctx: ApiExtensionContext;

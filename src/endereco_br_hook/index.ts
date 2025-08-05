@@ -1,13 +1,13 @@
 import { defineHook } from '@directus/extensions-sdk';
 import { EventContext } from '@directus/types';
-import { BairroService } from '../services/bairro';
+import { BairroService } from '../services/bairro.js';
 import {
   AbstractServiceOptions,
   ApiExtensionContext,
   ItemsService,
-} from '../utils/DirectusImports';
-import { atualizarCoordenadasEndereco, processaPesquisaCep } from '../utils/hook';
-import { Endereco } from '../utils/types';
+} from '../utils/DirectusImports.js';
+import { atualizarCoordenadasEndereco, processaPesquisaCep } from '../utils/hook.js';
+import { Endereco } from '../utils/types.js';
 
 export default defineHook(({ filter, action }, apiExtensionContext) => {
   const geolocationProvider = process.env.GEOLOCATION_PROVIDER as 'google' | 'mapbox';

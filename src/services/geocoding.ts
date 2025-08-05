@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Endereco } from '../utils/types';
+import { Endereco } from '../utils/types.js';
 
 export type GoogleMapsGeocodingResponse = {
   results: Array<{

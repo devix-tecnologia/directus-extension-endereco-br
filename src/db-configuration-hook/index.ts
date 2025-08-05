@@ -6,7 +6,7 @@ import {
   Field,
   Relation,
   SchemaOverview,
-} from '../utils/DirectusImports';
+} from '../utils/DirectusImports.js';
 
 interface ConfiguracaoSchema {
   collections?: Collection | Collection[];

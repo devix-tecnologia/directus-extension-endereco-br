@@ -1,5 +1,5 @@
 import { defineEndpoint } from '@directus/extensions-sdk';
-import { ObterDadosViaCep } from '../services/viacep';
+import { ObterDadosViaCep } from '../services/viacep.js';
 
 export default defineEndpoint((router, context) => {
   router.get('/:cep', async (req, res) => {

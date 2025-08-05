@@ -1,8 +1,8 @@
-import { ViaCepResultSucesso } from '../services/viacep';
-import { Endereco, EnderecoComPesquisa } from './types';
-import { BairroService } from '../services/bairro';
-import { ItemsService } from './DirectusImports';
-import { geocodingGoogle, geocodingMapbox } from '../services/geocoding';
+import { ViaCepResultSucesso } from '../services/viacep.js';
+import { Endereco, EnderecoComPesquisa } from './types.js';
+import { BairroService } from '../services/bairro.js';
+import { ItemsService } from './DirectusImports.js';
+import { geocodingGoogle, geocodingMapbox } from '../services/geocoding.js';
 
 export async function processaPesquisaCep(
   input: EnderecoComPesquisa,
