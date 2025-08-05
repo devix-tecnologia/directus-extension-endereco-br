@@ -4,4 +4,5 @@ onlyBuiltDependencies:
   - isolated-vm
   - oracledb
   - sharp
+  - sqlite3
   - vue-demi
