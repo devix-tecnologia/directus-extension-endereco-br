@@ -1,29 +1,25 @@
 services:
   directus:
-    image: directus/directus:latest
+    image: directus/directus:${DIRECTUS_VERSION:-9.23.1}
+    environment:
+      DB_CLIENT: 'sqlite3'
+      DB_FILENAME: '/tmp/data/directus.db'
+      KEY: 'test-key'
+      SECRET: 'test-secret'
+      ADMIN_EMAIL: 'admin@example.com'
+      ADMIN_PASSWORD: 'admin123'
+      PUBLIC_URL: 'http://localhost:18055'
+      STORAGE_LOCAL_ROOT: '/directus/uploads'
+      EXTENSIONS_PATH: './extensions'
     ports:
-      - "8055:8055"
-    environment:
-      - DB_CLIENT=pg
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_DATABASE=directus
-      - DB_USER=directus
-      - DB_PASSWORD=directus
-      - KEY=some-secret-key
-      - SECRET=your-secure-secret-here
-      - ADMIN_EMAIL=admin@example.com
-      - ADMIN_PASSWORD=password
-      - PUBLIC_URL=http://localhost:8055
-    depends_on:
-      - postgres
-  postgres:
-    image: postgres:13
-    environment:
-      - POSTGRES_USER=directus
-      - POSTGRES_PASSWORD=directus
-      - POSTGRES_DB=directus
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-volumes:
-  postgres_data:
+      - 18055:8055
+    tmpfs:
+      - /directus/uploads:rw,noexec,nosuid,size=64M,mode=777 # Usa memória temporária para uploads com permissões adequadas
+      - /tmp/data:rw,noexec,nosuid,size=64M # Usa memória temporária para o banco de dados
+    networks:
+      - directus-test-network
+
+networks:
+  directus-test-network:
+    driver: bridge
+    name: directus-endereco-br-network

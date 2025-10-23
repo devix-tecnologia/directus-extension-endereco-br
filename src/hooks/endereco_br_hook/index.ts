@@ -1,13 +1,13 @@
 import { defineHook } from '@directus/extensions-sdk';
 import { EventContext } from '@directus/types';
-import { BairroService } from '../services/bairro.js';
+import { BairroService } from '../../services/bairro.js';
 import {
   AbstractServiceOptions,
   ApiExtensionContext,
   ItemsService,
-} from '../types/DirectusImports.js';
-import { atualizarCoordenadasEndereco, processaPesquisaCep } from '../utils/hook.js';
-import { Endereco } from '../utils/types.js';
+} from '../../utils/DirectusImports.js';
+import { atualizarCoordenadasEndereco, processaPesquisaCep } from '../../utils/hook.js';
+import { Endereco } from '../../utils/types.js';
 
 export default defineHook(({ filter, action }, apiExtensionContext) => {
   const geolocationProvider = process.env.GEOLOCATION_PROVIDER as 'google' | 'mapbox';
@@ -39,7 +39,7 @@ export default defineHook(({ filter, action }, apiExtensionContext) => {
     const enderecoService = new apiExtensionContext.services.ItemsService<Endereco>(
       'endereco_br',
       opts
-    ) as unknown as ItemsService<Endereco, string>;
+    ) as unknown as ItemsService<Endereco>;
     return enderecoService;
   };
 

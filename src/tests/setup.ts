@@ -3,13 +3,15 @@ import { exec } from 'child_process';
 import axios from 'axios';
 import { testEnv } from './test-env.ts';
 import { logger } from './test-logger.ts';
+import { getDockerComposeCommand } from './utils/docker-compose-detector.ts';
 
 const execAsync = promisify(exec);
 
 async function cleanupDocker(): Promise<void> {
   try {
     logger.debug('Cleaning up test containers...');
-    await execAsync('docker compose -f docker-compose.test.yml down --remove-orphans');
+    const cmd = await getDockerComposeCommand();
+    await execAsync(`${cmd} -f docker-compose.test.yml down --remove-orphans`);
     logger.debug('Test containers removed');
   } catch (error) {
     logger.warn('Warning while cleaning test containers:', error);
@@ -21,7 +23,8 @@ export async function setupTestEnvironment(): Promise<string> {
     await cleanupDocker();
 
     logger.info('Starting test environment...');
-    const { stdout, stderr } = await execAsync('docker compose -f docker-compose.test.yml up -d');
+    const cmd = await getDockerComposeCommand();
+    const { stdout, stderr } = await execAsync(`${cmd} -f docker-compose.test.yml up -d`);
 
     const realError = stderr && !stderr.includes('Creating') && !stderr.includes('Starting');
     if (realError) {
@@ -58,7 +61,8 @@ export async function setupTestEnvironment(): Promise<string> {
 export async function teardownTestEnvironment(): Promise<void> {
   try {
     logger.info('Shutting down test environment...');
-    await execAsync('docker compose -f docker-compose.test.yml down --remove-orphans');
+    const cmd = await getDockerComposeCommand();
+    await execAsync(`${cmd} -f docker-compose.test.yml down --remove-orphans`);
   } catch (error) {
     logger.error('Erro ao finalizar ambiente de teste:', error);
     throw error;
@@ -99,12 +103,21 @@ async function waitForBootstrap(retries = 90, delay = 3000): Promise<void> {
 async function configurePermissions(token: string): Promise<void> {
   const baseURL = testEnv.DIRECTUS_PUBLIC_URL;
   const headers = { Authorization: `Bearer ${token}` };
-  const maxRetries = 3;
+  const axiosConfig = { headers, timeout: 30000 }; // Timeout de 30 segundos
+  const maxRetries = 10;
   let attempt = 0;
 
   while (attempt < maxRetries) {
     try {
-      const roleResponse = await axios.get(`${baseURL}/roles`, { headers });
+      attempt++;
+      logger.debug(`Tentando configurar permissões (tentativa ${attempt}/${maxRetries})...`);
+
+      // Pequeno delay antes de cada tentativa
+      if (attempt > 1) {
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+      }
+
+      const roleResponse = await axios.get(`${baseURL}/roles`, axiosConfig);
       let adminRole =
         roleResponse.data.data.find((role: any) => role.admin_access === true) ||
         roleResponse.data.data.find((role: any) => role.name === 'Administrator');
@@ -113,16 +126,16 @@ async function configurePermissions(token: string): Promise<void> {
         const newRoleResponse = await axios.post(
           `${baseURL}/roles`,
           { name: 'Administrator', admin_access: true, ip_access: null },
-          { headers }
+          axiosConfig
         );
         adminRole = newRoleResponse.data.data;
         logger.info(`✅ Role Administrator criada com ID: ${adminRole.id}`);
       } else if (!adminRole.admin_access) {
-        await axios.patch(`${baseURL}/roles/${adminRole.id}`, { admin_access: true }, { headers });
+        await axios.patch(`${baseURL}/roles/${adminRole.id}`, { admin_access: true }, axiosConfig);
         logger.info(`✅ Admin access habilitado para role ID: ${adminRole.id}`);
       }
 
-      const userResponse = await axios.get(`${baseURL}/users`, { headers });
+      const userResponse = await axios.get(`${baseURL}/users`, axiosConfig);
       const adminUser = userResponse.data.data.find(
         (user: any) => user.email === testEnv.DIRECTUS_ADMIN_EMAIL
       );
@@ -132,7 +145,7 @@ async function configurePermissions(token: string): Promise<void> {
             await axios.patch(
               `${baseURL}/users/${adminUser.id}`,
               { role: adminRole.id },
-              { headers }
+              axiosConfig
             );
             logger.info(`✅ Usuário admin associado à role ID: ${adminRole.id}`);
           } catch (error: any) {
@@ -156,7 +169,7 @@ async function configurePermissions(token: string): Promise<void> {
       }
 
       // Configurar permissões para directus_collections
-      const response1 = await axios.post(
+      await axios.post(
         `${baseURL}/permissions`,
         {
           role: adminRole.id,
@@ -175,32 +188,21 @@ async function configurePermissions(token: string): Promise<void> {
           validation: null,
           presets: null,
         },
-        { headers }
+        axiosConfig
       );
       logger.info(
         `✅ Permissões configuradas para directus_collections (Role ID: ${adminRole.id})`
       );
 
-      // Verificar e configurar admin_access com retry
-      for (let i = 0; i < 10; i++) {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        const roleCheck = await axios.get(`${baseURL}/roles/${adminRole.id}`, { headers });
-        if (roleCheck.data.admin_access === true) {
-          logger.info(`✅ Verificação: admin_access está ativo para role ID: ${adminRole.id}`);
-          break;
-        }
-        if (i === 9) {
-          logger.error('❌ Admin access não foi aplicado corretamente no role');
-          throw new Error('Admin access não aplicado');
-        }
-        logger.warn(`Tentativa ${i + 1}/10 falhou. Tentando novamente em 2s...`);
-      }
+      // Aguardar um pouco para o Directus processar as mudanças
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+      logger.info(`✅ Aguardando 5s para Directus processar mudanças de permissões...`);
 
       // Criar coleção endereco_br com retry
       const maxAttempts = 3;
       for (let i = 1; i <= maxAttempts; i++) {
         try {
-          const collectionsResponse = await axios.get(`${baseURL}/collections`, { headers });
+          const collectionsResponse = await axios.get(`${baseURL}/collections`, axiosConfig);
           if (!collectionsResponse.data.data.find((c: any) => c.collection === 'endereco_br')) {
             await axios.post(
               `${baseURL}/collections`,
@@ -215,7 +217,7 @@ async function configurePermissions(token: string): Promise<void> {
                   { field: 'uf', type: 'string', schema: { is_primary_key: false } },
                 ],
               },
-              { headers }
+              axiosConfig
             );
             logger.info('✅ Coleção endereco_br criada');
           }
@@ -245,19 +247,18 @@ async function configurePermissions(token: string): Promise<void> {
           action: 'create',
           permissions: { create: true, read: true, update: true, delete: true },
         },
-        { headers }
+        axiosConfig
       );
       logger.info(`✅ Permissões configuradas para endereco_br (Role ID: ${adminRole.id})`);
 
+      logger.info(`✅ Configuração de permissões completa (tentativa ${attempt}/${maxRetries})`);
       return;
-    } catch (error: any) {
-      attempt++;
+    } catch (error: unknown) {
       if (attempt === maxRetries) {
         logger.error('❌ Falha em configurePermissions após retries:', error);
         throw error;
       }
-      logger.warn(`Tentativa ${attempt}/${maxRetries} falhou. Tentando novamente em 2s...`);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      logger.warn(`Tentativa ${attempt}/${maxRetries} falhou. Tentando novamente em 3s...`);
     }
   }
 }

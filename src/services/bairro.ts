@@ -15,9 +15,9 @@ export class BairroService {
   constructor(ctx: ApiExtensionContext, opts: AbstractServiceOptions) {
     this.ctx = ctx;
     this.opts = opts;
-    this.bairroService = new this.ctx.services.ItemsService('bairro', this.opts);
-    this.cidadeService = new this.ctx.services.ItemsService('cidade', this.opts);
-    this.estadoService = new this.ctx.services.ItemsService('estado', this.opts);
+    this.bairroService = new this.ctx.services.ItemsService('bairro', this.opts) as unknown as ItemsService<Bairro>;
+    this.cidadeService = new this.ctx.services.ItemsService('cidade', this.opts) as unknown as ItemsService<Cidade>;
+    this.estadoService = new this.ctx.services.ItemsService('estado', this.opts) as unknown as ItemsService<Estado>;
   }
 
   lowerCaseSemAcentos(nome: string) {
