@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ['src/services/', 'src/utils/'],
+  entry: ['src/services/', 'src/utils/', 'src/tests/'],
   format: ['esm'],
   dts: true,
   external: [

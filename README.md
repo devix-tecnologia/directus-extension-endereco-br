@@ -37,7 +37,7 @@ Configure as seguintes variáveis de ambiente para habilitar o georreferenciamen
 | Variável | Descrição | Valores Aceitos |
 |----------|-----------|-----------------|
 | `GEOLOCATION_PROVIDER` | Provedor de geolocalização | `'google'` ou `'mapbox'` |
-| `GEOLOCATION_AUTH_TOKEN` | Token de autenticação da API escolhida | Seu token de API |
+| `GEOLOCATION_AUTH_TOKEN` | Token de autenticação da API escolhida | Seu token de API | 
 
 ### Provedores Suportados
 

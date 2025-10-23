@@ -4,6 +4,8 @@ import { ObterDadosViaCep } from '../services/viacep.js';
 export default defineEndpoint((router, context) => {
   router.get('/:cep', async (req, res) => {
     const cep = req.params.cep;
+
+    context.logger.info(`Endpoint /pesquisa-cep/${cep} chamado`);
     const cepLimpo = String(cep).trim().replace(/\D+/g, '');
 
     context.logger.info(`Requisitando informações de endereço para o CEP: ${cepLimpo}`);

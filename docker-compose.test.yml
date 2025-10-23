@@ -1,0 +1,29 @@
+services:
+  directus:
+    image: directus/directus:latest
+    ports:
+      - "8055:8055"
+    environment:
+      - DB_CLIENT=pg
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=directus
+      - DB_USER=directus
+      - DB_PASSWORD=directus
+      - KEY=some-secret-key
+      - SECRET=your-secure-secret-here
+      - ADMIN_EMAIL=admin@example.com
+      - ADMIN_PASSWORD=password
+      - PUBLIC_URL=http://localhost:8055
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=directus
+      - POSTGRES_PASSWORD=directus
+      - POSTGRES_DB=directus
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
