@@ -1,7 +1,7 @@
 import { defineEndpoint } from '@directus/extensions-sdk';
 import { ObterDadosViaCep } from '../../services/viacep.js';
 
-export default defineEndpoint((router, context) => {
+const pesquisaCepEndpoint: ReturnType<typeof defineEndpoint> = defineEndpoint((router, context) => {
   router.get('/:cep', async (req, res) => {
     const cep = req.params.cep;
 
@@ -34,7 +34,6 @@ export default defineEndpoint((router, context) => {
       res.json([{ text: displayText, value: JSON.stringify(dados) }]);
     } catch (error) {
       context.logger.error(error);
-
       res.status(200);
       res.json([
         { text: 'Serviço indisponível no momento. Tente novamente mais tarde.', value: undefined },
@@ -42,3 +41,5 @@ export default defineEndpoint((router, context) => {
     }
   });
 });
+
+export default pesquisaCepEndpoint as unknown as typeof pesquisaCepEndpoint;

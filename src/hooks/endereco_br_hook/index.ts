@@ -5,11 +5,11 @@ import {
   AbstractServiceOptions,
   ApiExtensionContext,
   ItemsService,
-} from '../../utils/DirectusImports.js';
+} from '../../types/DirectusImports.js';
 import { atualizarCoordenadasEndereco, processaPesquisaCep } from '../../utils/hook.js';
 import { Endereco } from '../../utils/types.js';
 
-export default defineHook(({ filter, action }, apiExtensionContext) => {
+const enderecoBrHook: ReturnType<typeof defineHook> = defineHook(({ filter, action }, apiExtensionContext) => {
   const geolocationProvider = process.env.GEOLOCATION_PROVIDER as 'google' | 'mapbox';
   const geolocationAuthToken: string | undefined = process.env.GEOLOCATION_AUTH_TOKEN;
 
@@ -39,7 +39,7 @@ export default defineHook(({ filter, action }, apiExtensionContext) => {
     const enderecoService = new apiExtensionContext.services.ItemsService<Endereco>(
       'endereco_br',
       opts
-    ) as unknown as ItemsService<Endereco>;
+    ) as unknown as ItemsService<Endereco, string>;
     return enderecoService;
   };
 
@@ -86,3 +86,5 @@ export default defineHook(({ filter, action }, apiExtensionContext) => {
     });
   });
 });
+
+export default enderecoBrHook as unknown as typeof enderecoBrHook;

@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import { getDockerComposeCommand } from './docker-compose-detector.ts';
+import { getDockerComposeCommand } from './docker-compose-detector.js';
 
 const execAsync = promisify(exec);
 

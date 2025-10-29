@@ -17,6 +17,6 @@ export async function getAdminToken() {
     throw new Error(`Erro ao autenticar: ${response.status} - ${errorText}`);
   }
 
-  const data = await response.json();
+  const data = (await response.json()) as { data?: { access_token?: string } };
   return data.data?.access_token;
 }

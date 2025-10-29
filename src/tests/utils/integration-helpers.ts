@@ -1,6 +1,6 @@
 import { execSync } from 'node:child_process';
 import axios from 'axios';
-import { getDockerComposeCommand } from './docker-compose-detector.ts';
+import { getDockerComposeCommand } from './docker-compose-detector.js';
 
 // 🔹 Tenta detectar se já há um Directus rodando localmente
 async function isDirectusRunning(url: string): Promise<boolean> {

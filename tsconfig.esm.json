@@ -9,5 +9,6 @@
     "declarationDir": "./dist/esm/types",
     "types": ["node"],
     "isolatedModules": true
-  }
+  },
+  "include": ["src"]
 }
