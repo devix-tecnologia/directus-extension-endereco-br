@@ -5,22 +5,22 @@ import { getDockerComposeCommand } from './docker-compose-detector.js';
 const execAsync = promisify(exec);
 
 async function main() {
-  try {
-    console.log('🔍 Detectando comando Docker Compose...\n');
+	try {
+		console.log('🔍 Detectando comando Docker Compose...\n');
 
-    const cmd = await getDockerComposeCommand();
-    console.log(`✅ Detectado: ${cmd}`);
+		const cmd = await getDockerComposeCommand();
+		console.log(`✅ Detectado: ${cmd}`);
 
-    // Testa o comando
-    console.log('\n📋 Verificando versão:');
-    const { stdout } = await execAsync(`${cmd} version`);
-    console.log(stdout);
+		// Testa o comando
+		console.log('\n📋 Verificando versão:');
+		const { stdout } = await execAsync(`${cmd} version`);
+		console.log(stdout);
 
-    console.log('✅ Docker Compose está funcionando corretamente!');
-  } catch (error) {
-    console.error('❌ Erro:', error instanceof Error ? error.message : error);
-    process.exit(1);
-  }
+		console.log('✅ Docker Compose está funcionando corretamente!');
+	} catch (error) {
+		console.error('❌ Erro:', error instanceof Error ? error.message : error);
+		process.exit(1);
+	}
 }
 
 main();

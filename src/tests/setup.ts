@@ -1,140 +1,279 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import axios from 'axios';
 import { setupTestEnv, testEnv } from './test-env.js';
 import { logger } from './test-logger.js';
 
 const execAsync = promisify(exec);
 
-// Detecta qual comando Docker Compose está disponível
+// Detecta qual comando docker compose usar (docker-compose ou docker compose)
 let dockerComposeCommand: string | null = null;
 
 async function getDockerComposeCommand(): Promise<string> {
-  if (dockerComposeCommand) {
-    return dockerComposeCommand;
-  }
+	if (dockerComposeCommand) {
+		return dockerComposeCommand;
+	}
 
-  try {
-    // Tenta docker compose (v2)
-    await execAsync('docker compose version');
-    dockerComposeCommand = 'docker compose';
-    logger.debug('Using Docker Compose v2 (docker compose)');
-  } catch {
-    try {
-      // Fallback para docker-compose (v1)
-      await execAsync('docker-compose --version');
-      dockerComposeCommand = 'docker-compose';
-      logger.debug('Using Docker Compose v1 (docker-compose)');
-    } catch {
-      throw new Error(
-        'Docker Compose not found. Please install Docker Compose v1 or v2.',
-      );
-    }
-  }
-
-  return dockerComposeCommand;
+	// Tenta docker compose primeiro (novo padrão)
+	try {
+		await execAsync('docker compose version');
+		dockerComposeCommand = 'docker compose';
+		logger.debug('Using: docker compose');
+		return dockerComposeCommand;
+	} catch {
+		// Fallback para docker-compose (versão antiga)
+		try {
+			await execAsync('docker-compose version');
+			dockerComposeCommand = 'docker-compose';
+			logger.debug('Using: docker-compose');
+			return dockerComposeCommand;
+		} catch {
+			throw new Error('Neither "docker compose" nor "docker-compose" found');
+		}
+	}
 }
 
-async function cleanupDocker() {
-  try {
-    logger.debug('Cleaning up test containers...');
-    const composeCmd = await getDockerComposeCommand();
-    await execAsync(
-      `DIRECTUS_VERSION=${process.env.DIRECTUS_VERSION} ${composeCmd} -f docker-compose.test.yml down --remove-orphans`,
-    );
-    logger.debug('Test containers removed');
-  } catch (error) {
-    logger.warn('Warning while cleaning test containers');
-  }
+// Função para fazer requisições HTTP via Node.js dentro do container
+export async function dockerHttpRequest(
+	method: string,
+	path: string,
+	data?: any,
+	headers?: Record<string, string>,
+	testSuiteId?: string
+): Promise<any> {
+	const suiteId = testSuiteId || process.env.TEST_SUITE_ID || 'main';
+	const containerName = `directus-endereco-br-${suiteId}-${process.env.DIRECTUS_VERSION}`;
+
+	// Cria um script Node.js para fazer a requisição HTTP
+	const headersJson = JSON.stringify(headers || {}).replace(/"/g, '\\"');
+	const dataJson = data ? JSON.stringify(data).replace(/"/g, '\\"') : '';
+
+	const nodeScript = `
+const http = require('http');
+const options = {
+  hostname: '127.0.0.1',
+  port: 8055,
+  path: '${path}',
+  method: '${method}',
+  headers: JSON.parse("${headersJson}")
+};
+${data ? `const postData = "${dataJson}"; options.headers['Content-Type'] = 'application/json'; options.headers['Content-Length'] = Buffer.byteLength(postData);` : ''}
+const req = http.request(options, (res) => {
+  let data = '';
+  res.on('data', (chunk) => { data += chunk; });
+  res.on('end', () => { console.log(data); });
+});
+req.on('error', (error) => { console.error(JSON.stringify({error: error.message})); process.exit(1); });
+${data ? `req.write(postData);` : ''}
+req.end();
+`;
+
+	const escapedScript = nodeScript.replace(/\n/g, ' ').replace(/'/g, "'\\''");
+	const fullCommand = `docker exec ${containerName} node -e '${escapedScript}'`;
+
+	try {
+		const { stdout } = await execAsync(fullCommand);
+
+		// Se stdout estiver vazio, retornar objeto vazio ao invés de tentar fazer parse
+		if (!stdout || stdout.trim() === '') {
+			return {};
+		}
+
+		return JSON.parse(stdout);
+	} catch (error: any) {
+		logger.error('Docker HTTP request failed:', error);
+		throw error;
+	}
 }
 
-export async function setupTestEnvironment() {
-  try {
-    // Limpa o ambiente Docker
-    await cleanupDocker();
+async function cleanupDocker(_testSuiteId: string) {
+	try {
+		logger.debug('Cleaning up test containers...');
 
-    // Configura o ambiente de teste
-    const restoreEnv = setupTestEnv();
+		// Para containers que possam estar rodando
+		try {
+			const composeCmd = await getDockerComposeCommand();
 
-    // Start Docker containers
-    logger.info('Starting test environment...');
-    const composeCmd = await getDockerComposeCommand();
-    const { stdout, stderr } = await execAsync(
-      `DIRECTUS_VERSION=${process.env.DIRECTUS_VERSION} ${composeCmd} -f docker-compose.test.yml up -d`,
-    );
+			await execAsync(
+				`TEST_SUITE_ID=${_testSuiteId} DIRECTUS_VERSION=${process.env.DIRECTUS_VERSION} ${composeCmd} -f docker-compose.test.yml down --remove-orphans --volumes 2>/dev/null || true`
+			);
+		} catch (error) {
+			logger.debug('Error stopping containers (may not exist):', error);
+		}
 
-    // Docker Compose uses stderr for progress messages
-    const realError =
-      stderr && !stderr.includes('Creating') && !stderr.includes('Starting');
-    if (realError) {
-      logger.error('Docker Compose error:', stderr);
-    } else if (stdout || stderr) {
-      logger.dockerProgress(stdout || stderr);
-    }
+		// Remove containers forçadamente se necessário
+		const containerName = `directus-endereco-br-${_testSuiteId}-${process.env.DIRECTUS_VERSION}`;
 
-    // Wait for Directus to be ready
-    logger.info('Waiting for Directus to be ready...');
-    await waitForBootstrap();
+		try {
+			await execAsync(`docker rm -f ${containerName} 2>/dev/null || true`);
+		} catch (error) {
+			logger.debug('Container does not exist or already removed', error);
+		}
 
-    // Login to get admin access token
-    const loginResponse = await axios.post(`${testEnv.DIRECTUS_PUBLIC_URL}/auth/login`, {
-      email: testEnv.DIRECTUS_ADMIN_EMAIL,
-      password: testEnv.DIRECTUS_ADMIN_PASSWORD,
-    });
+		// Remove network se existir
+		const networkName = `directus-endereco-br-test-${_testSuiteId}-${process.env.DIRECTUS_VERSION}`;
 
-    const accessToken = loginResponse.data.data.access_token;
+		try {
+			await execAsync(`docker network rm ${networkName} 2>/dev/null || true`);
+		} catch (error) {
+			logger.debug('Network does not exist or already removed', error);
+		}
 
-    // Set access token for tests
-    process.env.DIRECTUS_ACCESS_TOKEN = accessToken;
+		// Aguarda um pouco para garantir que as portas foram liberadas
+		await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    return accessToken;
-  } catch (error) {
-    console.error('Failed to setup test environment:', error);
-    throw error;
-  }
+		logger.debug('Test containers removed');
+	} catch (error) {
+		logger.warn('Warning while cleaning test containers:', error);
+	}
 }
 
-export async function teardownTestEnvironment() {
-  try {
-    logger.info('Shutting down test environment...');
-    const composeCmd = await getDockerComposeCommand();
-    await execAsync(
-      `DIRECTUS_VERSION=${process.env.DIRECTUS_VERSION} ${composeCmd} -f docker-compose.test.yml down --remove-orphans`,
-    );
-  } catch (error) {
-    console.error('Erro ao finalizar ambiente de teste:', error);
-    throw error;
-  }
+async function waitForContainerHealth(containerName: string, retries = 100, delay = 2000) {
+	for (let i = 0; i < retries; i++) {
+		try {
+			const { stdout } = await execAsync(
+				`docker inspect --format='{{.State.Health.Status}}' ${containerName}`
+			);
+			const healthStatus = stdout.trim();
+
+			if (healthStatus === 'healthy') {
+				logger.info(`Container ${containerName} is healthy`);
+				return;
+			}
+
+			logger.debug(`Container health: ${healthStatus} (attempt ${i + 1}/${retries})`);
+		} catch {
+			logger.debug(`Waiting for container to be created (attempt ${i + 1}/${retries})`);
+		}
+
+		await new Promise((resolve) => setTimeout(resolve, delay));
+	}
+
+	throw new Error(`Container ${containerName} did not become healthy`);
 }
 
-async function waitForBootstrap(retries = 60, delay = 2000) {
-  for (let i = 0; i < retries; i++) {
-    try {
-      logger.debug(`Connection attempt ${i + 1}/${retries}`);
+export async function setupTestEnvironment(testSuiteId: string = 'main') {
+	try {
+		// Limpa o ambiente Docker
+		await cleanupDocker(testSuiteId);
 
-      // Check if server is responding
-      const healthCheck = await axios.get(`${testEnv.DIRECTUS_PUBLIC_URL}/server/health`);
-      if (healthCheck.data.status !== 'ok') {
-        throw new Error('Health check failed');
-      }
+		// Configura o ambiente de teste
+		setupTestEnv();
 
-      // Try to login to verify if the system is fully ready
-      try {
-        await axios.post(`${testEnv.DIRECTUS_PUBLIC_URL}/auth/login`, {
-          email: testEnv.DIRECTUS_ADMIN_EMAIL,
-          password: testEnv.DIRECTUS_ADMIN_PASSWORD,
-        });
-        logger.info('Directus is ready and accepting authentication');
-        return;
-      } catch (loginError) {
-        throw new Error('System not ready for authentication');
-      }
-    } catch (error: any) {
-      if (i === retries - 1) {
-        logger.error('Failed to connect to Directus', error);
-        throw new Error('Directus failed to start');
-      }
-      await new Promise((resolve) => setTimeout(resolve, delay));
-    }
-  }
+		// Start Docker containers
+		logger.info('Starting test environment...');
+
+		const composeCmd = await getDockerComposeCommand();
+
+		const { stdout, stderr } = await execAsync(
+			`TEST_SUITE_ID=${testSuiteId} DIRECTUS_VERSION=${process.env.DIRECTUS_VERSION} ${composeCmd} -f docker-compose.test.yml up -d`
+		);
+
+		// Docker Compose uses stderr for progress messages
+		const realError = stderr && !stderr.includes('Creating') && !stderr.includes('Starting');
+
+		if (realError) {
+			logger.error('Docker Compose error:', stderr);
+		} else if (stdout || stderr) {
+			logger.dockerProgress(stdout || stderr);
+		}
+
+		// Wait for container to be healthy (using docker healthcheck)
+		logger.info('Waiting for container to be healthy...');
+		const containerName = `directus-endereco-br-${testSuiteId}-${process.env.DIRECTUS_VERSION}`;
+		await waitForContainerHealth(containerName);
+
+		// Wait for Directus to be ready
+		logger.info('Waiting for Directus to be ready...');
+		await waitForBootstrap(testSuiteId);
+
+		// Login to get admin access token via docker exec
+		const loginResponse = await dockerHttpRequest(
+			'POST',
+			'/auth/login',
+			{
+				email: testEnv.DIRECTUS_ADMIN_EMAIL,
+				password: testEnv.DIRECTUS_ADMIN_PASSWORD,
+			},
+			undefined,
+			testSuiteId
+		);
+
+		const accessToken = loginResponse.data?.access_token || loginResponse.access_token;
+
+		// Set access token for tests
+		process.env.DIRECTUS_ACCESS_TOKEN = accessToken;
+
+		return accessToken;
+	} catch (error) {
+		logger.error('Failed to setup test environment:', error);
+		throw error;
+	}
+}
+
+export async function teardownTestEnvironment(_testSuiteId: string = 'main') {
+	try {
+		logger.info('Shutting down test environment...');
+
+		const composeCmd = await getDockerComposeCommand();
+
+		await execAsync(
+			`TEST_SUITE_ID=${_testSuiteId} DIRECTUS_VERSION=${process.env.DIRECTUS_VERSION} ${composeCmd} -f docker-compose.test.yml down --remove-orphans`
+		);
+	} catch (error) {
+		logger.error('Erro ao finalizar ambiente de teste:', error);
+		throw error;
+	}
+}
+
+async function waitForBootstrap(testSuiteId: string, retries = 90, delay = 2000) {
+	for (let i = 0; i < retries; i++) {
+		try {
+			logger.debug(`Connection attempt ${i + 1}/${retries}`);
+
+			// Check if server is responding via docker exec
+			const healthCheck = await dockerHttpRequest(
+				'GET',
+				'/server/health',
+				undefined,
+				undefined,
+				testSuiteId
+			);
+
+			logger.debug(`Health check response: ${JSON.stringify(healthCheck)}`);
+
+			const status = healthCheck.status || healthCheck.data?.status;
+
+			if (status !== 'ok') {
+				throw new Error(`Health check failed: ${status}`);
+			}
+
+			// Try to login to verify if the system is fully ready
+			try {
+				const loginResult = await dockerHttpRequest(
+					'POST',
+					'/auth/login',
+					{
+						email: testEnv.DIRECTUS_ADMIN_EMAIL,
+						password: testEnv.DIRECTUS_ADMIN_PASSWORD,
+					},
+					undefined,
+					testSuiteId
+				);
+
+				logger.debug(`Login response: ${JSON.stringify(loginResult)}`);
+				logger.info('Directus is ready and accepting authentication');
+				return;
+			} catch (loginError: any) {
+				logger.debug(`Login error: ${loginError.message}`);
+				throw new Error('System not ready for authentication');
+			}
+		} catch (error: any) {
+			if (i === retries - 1) {
+				logger.error('Failed to connect to Directus', error);
+				throw new Error('Directus failed to start');
+			}
+
+			await new Promise((resolve) => setTimeout(resolve, delay));
+		}
+	}
 }

@@ -1,14 +1,14 @@
 {
-  "extends": "./tsconfig.base.json",
-  "compilerOptions": {
-    "lib": ["ES2022", "DOM"],
-    "target": "ES2022",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "outDir": "./dist/esm",
-    "declarationDir": "./dist/esm/types",
-    "types": ["node"],
-    "isolatedModules": true
-  },
-  "include": ["src"]
+	"extends": "./tsconfig.base.json",
+	"compilerOptions": {
+		"lib": ["ES2022", "DOM"],
+		"target": "ES2022",
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
+		"outDir": "./dist/esm",
+		"declarationDir": "./dist/esm/types",
+		"types": ["node"],
+		"isolatedModules": true
+	},
+	"include": ["src"]
 }

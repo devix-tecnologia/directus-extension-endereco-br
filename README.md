@@ -1,6 +1,7 @@
 ![Banner da Extensão de Endereços do Brasil para Directus](https://github.com/devix-tecnologia/directus-extension-endereco-br/raw/main/docs/Banner.png)
 
 # Extensão do Directus para Endereços Brasileiros
+
 > Crie, organize, pesquise e georreferencie endereços brasileiros de forma fácil e eficiente
 
 [![Versão npm](https://img.shields.io/npm/v/directus-extension-endereco-br)](https://www.npmjs.com/package/directus-extension-endereco-br)
@@ -10,7 +11,9 @@
 ## ✨ Funcionalidades
 
 ### 🔍 Pesquisa por CEP
+
 Agilize o cadastro de endereços permitindo pesquisar a partir do CEP para buscar automaticamente:
+
 - Logradouro
 - Bairro
 - Cidade
@@ -18,13 +21,17 @@ Agilize o cadastro de endereços permitindo pesquisar a partir do CEP para busca
 - Código IBGE
 
 ### ⚙️ Configuração Automática
+
 Toda a estrutura necessária é criada instantaneamente:
+
 - Coleções e relacionamentos são configurados durante a instalação
 - Lista completa dos estados brasileiros é inserida no banco de dados
 - Interface amigável pronta para uso
 
 ### 📍 Georreferenciamento
+
 Localize endereços precisamente:
+
 - Armazena latitude e longitude dos endereços
 - Integração com os principais provedores de geolocalização
 - Visualização em mapa
@@ -32,12 +39,13 @@ Localize endereços precisamente:
 ## 🛠️ Configuração
 
 ### Provedores de Georreferenciamento
+
 Configure as seguintes variáveis de ambiente para habilitar o georreferenciamento:
 
-| Variável | Descrição | Valores Aceitos |
-|----------|-----------|-----------------|
-| `GEOLOCATION_PROVIDER` | Provedor de geolocalização | `'google'` ou `'mapbox'` |
-| `GEOLOCATION_AUTH_TOKEN` | Token de autenticação da API escolhida | Seu token de API | 
+| Variável                 | Descrição                              | Valores Aceitos          |
+| ------------------------ | -------------------------------------- | ------------------------ |
+| `GEOLOCATION_PROVIDER`   | Provedor de geolocalização             | `'google'` ou `'mapbox'` |
+| `GEOLOCATION_AUTH_TOKEN` | Token de autenticação da API escolhida | Seu token de API         |
 
 ### Provedores Suportados
 
@@ -47,13 +55,16 @@ Configure as seguintes variáveis de ambiente para habilitar o georreferenciamen
 ## 📦 Instalação
 
 ### Via Marketplace (Recomendado)
+
 A partir da versão 10.10 do Directus:
+
 1. Acesse o painel administrativo do Directus
 2. Navegue até `Configurações → Marketplace`
 3. Pesquise por `endereco-br`
 4. Clique em "Instalar"
 
 ### Via NPM
+
 ```bash
 npm install directus-extension-endereco-br
 ```
@@ -61,32 +72,40 @@ npm install directus-extension-endereco-br
 ## 🖼️ Screenshots
 
 ### Pesquisa por CEP
+
 ![Pesquisa por CEP](https://github.com/devix-tecnologia/directus-extension-endereco-br/raw/main/docs/pesquisa.png)
-*Faça a pesquisa por CEP e selecione o endereço rapidamente*
+_Faça a pesquisa por CEP e selecione o endereço rapidamente_
 
 ### Preenchimento de Informações Adicionais
+
 ![Preenchimento de Informações Adicionais](https://github.com/devix-tecnologia/directus-extension-endereco-br/raw/main/docs/preenchendo_adicional.png)
-*Preencha informações adicionais para completar o cadastro*
+_Preencha informações adicionais para completar o cadastro_
 
 ### Preenchimento Automático
+
 ![Preenchimento Automático](https://github.com/devix-tecnologia/directus-extension-endereco-br/raw/main/docs/preenchimento_automatico.png)
-*Ao salvar, os principais campos são preenchidos com os dados da pesquisa automática*
+_Ao salvar, os principais campos são preenchidos com os dados da pesquisa automática_
 
 ### Georreferenciamento
+
 ![Georreferenciamento](https://github.com/devix-tecnologia/directus-extension-endereco-br/raw/main/docs/georeferenciamento.png)
-*Georreferenciamento do endereço quando configurado*
+_Georreferenciamento do endereço quando configurado_
 
 ### Cadastro Automático
+
 ![Cadastro Automático](https://github.com/devix-tecnologia/directus-extension-endereco-br/raw/main/docs/cidade_bairro_automatico.png)
-*Cadastro automático de bairro e cidades incluindo informações do IBGE*
+_Cadastro automático de bairro e cidades incluindo informações do IBGE_
 
 ## 🤝 Contribuição
+
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
 
 ## 📄 Licença
+
 [MIT](https://github.com/devix-tecnologia/directus-extension-endereco-br/blob/main/LICENSE)
 
 ## 👥 Autores
+
 - [Fernando Gatti](https://github.com/gattifernando)
 - [Lucas Scart](https://github.com/scart97)
 - [Rafael Paviotti](https://github.com/RPaviotti)

@@ -1,207 +1,196 @@
 import {
-  defineHook,
-  readInnerFile,
-  ItemsService,
-  Collection,
-  Field,
-  Relation,
-  SchemaOverview,
+	defineHook,
+	readInnerFile,
+	Collection,
+	Field,
+	Relation,
+	SchemaOverview,
 } from '../utils/DirectusImports.js';
 
 interface ConfiguracaoSchema {
-  collections?: Collection | Collection[];
-  fields?: Field | Field[];
-  relations?: Relation | Relation[];
+	collections?: Collection | Collection[];
+	fields?: Field | Field[];
+	relations?: Relation | Relation[];
 }
 
 // Interface para erros específicos do Directus
 interface DirectusError extends Error {
-  code?: string;
-  status?: number;
-  type?: string;
+	code?: string;
+	status?: number;
+	type?: string;
 }
 
 // 🟢 Tipagem explícita para evitar o erro TS2742
 type DirectusHook = ReturnType<typeof defineHook>;
 
-const hook: DirectusHook = defineHook(({ init }, { services, database, getSchema }) => {
-  const { CollectionsService, RelationsService } = services;
+const hook: DirectusHook = defineHook(({ init }, { services, database, getSchema, logger }) => {
+	const { CollectionsService, RelationsService } = services;
 
-  init('routes.custom.after', async () => {
-    try {
-      const configuracaoSchema = JSON.parse(
-        readInnerFile('state.json').toString()
-      ) as ConfiguracaoSchema;
+	init('routes.custom.after', async () => {
+		try {
+			const configuracaoSchema = JSON.parse(
+				readInnerFile('state.json').toString()
+			) as ConfiguracaoSchema;
 
-      const esquema = await getSchema();
+			const esquema = await getSchema();
 
-      // Processa as coleções, se existirem
-      if (configuracaoSchema.collections) {
-        await processarColecoes(configuracaoSchema, esquema);
-      }
+			// Processa as coleções, se existirem
+			if (configuracaoSchema.collections) {
+				await processarColecoes(configuracaoSchema, esquema, logger);
+			}
 
-      // Processa as relações, se existirem
-      if (configuracaoSchema.relations) {
-        await processarRelacoes(configuracaoSchema, esquema);
-      }
+			// Processa as relações, se existirem
+			if (configuracaoSchema.relations) {
+				await processarRelacoes(configuracaoSchema, esquema, logger);
+			}
 
-      // Cadastra dados iniciais, se necessário
-      await cadastrarDadosIniciais(esquema);
-    } catch (erro) {
-      console.error('Erro no hook de inicialização de estado:', erro);
-    }
-  });
+			// Cadastra dados iniciais, se necessário
+			await cadastrarDadosIniciais(esquema, logger);
+		} catch (erro) {
+			// Erro no hook de inicialização de estado - silencioso em produção
+			if (process.env.NODE_ENV === 'development') {
+				throw erro;
+			}
+		}
+	});
 
-  /**
-   * Verifica se um erro é do tipo "não encontrado" ou "sem permissão"
-   */
-  function isNotFoundOrForbiddenError(erro: unknown): boolean {
-    if (erro instanceof Error) {
-      const directusError = erro as DirectusError;
-      if (directusError.code === 'FORBIDDEN' || directusError.status === 403) return true;
-      if (directusError.code === 'NOT_FOUND' || directusError.status === 404) return true;
+	/**
+	 * Verifica se um erro é do tipo "não encontrado" ou "sem permissão"
+	 */
+	function isNotFoundOrForbiddenError(erro: unknown): boolean {
+		if (erro instanceof Error) {
+			const directusError = erro as DirectusError;
+			if (directusError.code === 'FORBIDDEN' || directusError.status === 403) return true;
+			if (directusError.code === 'NOT_FOUND' || directusError.status === 404) return true;
 
-      if (
-        directusError.message &&
-        (directusError.message.includes('permission') ||
-          directusError.message.includes('not found') ||
-          directusError.message.includes('does not exist'))
-      ) {
-        return true;
-      }
-    }
-    return false;
-  }
+			if (
+				directusError.message &&
+				(directusError.message.includes('permission') ||
+					directusError.message.includes('not found') ||
+					directusError.message.includes('does not exist'))
+			) {
+				return true;
+			}
+		}
 
-  /**
-   * Processa as coleções do arquivo de configuração
-   */
-  async function processarColecoes(
-    config: ConfiguracaoSchema,
-    esquema: SchemaOverview
-  ): Promise<void> {
-    const servicoColecoes = new CollectionsService({
-      knex: database,
-      schema: esquema,
-    });
+		return false;
+	}
 
-    const colecoes = normalizarArray(config.collections);
+	/**
+	 * Processa as coleções do arquivo de configuração
+	 */
+	async function processarColecoes(
+		config: ConfiguracaoSchema,
+		esquema: SchemaOverview,
+		logger: any
+	): Promise<void> {
+		const servicoColecoes = new CollectionsService({
+			knex: database,
+			schema: esquema,
+		});
 
-    const colecoesComGrupo = colecoes.filter((col) => col.meta?.group !== null);
-    const colecoesSemGrupo = colecoes.filter((col) => col.meta?.group == null);
-    const colecoesOrdenadas = [...colecoesSemGrupo, ...colecoesComGrupo];
+		const colecoes = normalizarArray(config.collections);
 
-    for (const colecao of colecoesOrdenadas) {
-      try {
-        await servicoColecoes.readOne(colecao.collection);
-        console.log(`Coleção ${colecao.collection} já existe.`);
-      } catch (erro: unknown) {
-        if (isNotFoundOrForbiddenError(erro)) {
-          try {
-            const campos = normalizarArray(config.fields).filter(
-              (campo) => campo.collection === colecao.collection
-            );
+		const colecoesComGrupo = colecoes.filter((col) => col.meta?.group !== null);
+		const colecoesSemGrupo = colecoes.filter((col) => col.meta?.group == null);
+		const colecoesOrdenadas = [...colecoesSemGrupo, ...colecoesComGrupo];
 
-            await servicoColecoes.createOne(
-              { ...colecao, fields: campos },
-              { autoPurgeCache: true, autoPurgeSystemCache: true }
-            );
-            console.log(`Coleção ${colecao.collection} criada com sucesso.`);
-          } catch (erroCreate) {
-            console.error(`Erro ao criar coleção ${colecao.collection}:`, erroCreate);
-            throw erroCreate;
-          }
-        } else {
-          console.error(`Erro ao verificar coleção ${colecao.collection}:`, erro);
-          throw erro;
-        }
-      }
-    }
-  }
+		for (const colecao of colecoesOrdenadas) {
+			try {
+				await servicoColecoes.readOne(colecao.collection);
+				logger.info(`Coleção ${colecao.collection} já existe.`);
+			} catch (erro: unknown) {
+				if (isNotFoundOrForbiddenError(erro)) {
+					const campos = normalizarArray(config.fields).filter(
+						(campo) => campo.collection === colecao.collection
+					);
 
-  /**
-   * Processa as relações do arquivo de configuração
-   */
-  async function processarRelacoes(
-    config: ConfiguracaoSchema,
-    _esquema: SchemaOverview
-  ): Promise<void> {
-    const servicoRelacoes = new RelationsService({
-      knex: database,
-      schema: await getSchema({ database }),
-    });
+					await servicoColecoes.createOne({ ...colecao, fields: campos });
 
-    const relacoes = normalizarArray(config.relations);
+					logger.info(`Coleção ${colecao.collection} criada com sucesso.`);
+				} else {
+					logger.error(`Erro ao verificar coleção ${colecao.collection}:`, erro);
+					throw erro;
+				}
+			}
+		}
+	}
 
-    for (const relacao of relacoes) {
-      try {
-        await servicoRelacoes.readOne(relacao.collection, relacao.field);
-        console.log(`Relação ${relacao.collection}.${relacao.field} já existe.`);
-      } catch (erro: unknown) {
-        if (isNotFoundOrForbiddenError(erro)) {
-          try {
-            await servicoRelacoes.createOne(relacao, {
-              autoPurgeCache: true,
-              autoPurgeSystemCache: true,
-            });
-            console.log(`Relação ${relacao.collection}.${relacao.field} criada com sucesso.`);
-          } catch (erroCreate) {
-            console.error(
-              `Erro ao criar relação ${relacao.collection}.${relacao.field}:`,
-              erroCreate
-            );
-            throw erroCreate;
-          }
-        } else {
-          console.error(`Erro ao verificar relação ${relacao.collection}.${relacao.field}:`, erro);
-          throw erro;
-        }
-      }
-    }
-  }
+	/**
+	 * Processa as relações do arquivo de configuração
+	 */
+	async function processarRelacoes(
+		config: ConfiguracaoSchema,
+		esquema: SchemaOverview,
+		logger: any
+	): Promise<void> {
+		const servicoRelacoes = new RelationsService({
+			knex: database,
+			schema: esquema,
+		});
 
-  /**
-   * Cadastra dados iniciais se necessário
-   */
-  async function cadastrarDadosIniciais(esquema: SchemaOverview): Promise<void> {
-    const servicoPais = new ItemsService('pais', {
-      knex: database,
-      schema: esquema,
-    });
+		const relacoes = normalizarArray(config.relations);
 
-    try {
-      const itens = await servicoPais.readByQuery({
-        fields: ['id'],
-        limit: 1,
-      });
+		for (const relacao of relacoes) {
+			try {
+				// Verificar se a relação já existe consultando diretamente o banco
+				const relacaoExistente = await database
+					.select('*')
+					.from('directus_relations')
+					.where('many_collection', relacao.collection)
+					.where('many_field', relacao.field)
+					.first();
 
-      if (itens.length === 0) {
-        const dadosIniciais = JSON.parse(readInnerFile('seed.json').toString());
-        await servicoPais.createMany(dadosIniciais);
-        console.log('Dados iniciais de países cadastrados com sucesso.');
-      } else {
-        console.log('Dados de países já existem, pulando cadastro inicial.');
-      }
-    } catch (erro) {
-      console.error('Erro ao verificar ou cadastrar dados iniciais:', erro);
-      throw erro;
-    }
-  }
+				if (relacaoExistente) {
+					logger.info(`Relação ${relacao.collection}.${relacao.field} já existe.`);
+				} else {
+					await servicoRelacoes.createOne(relacao);
 
-  /**
-   * Função auxiliar para normalizar dados em arrays
-   */
-  function normalizarArray<T>(dados: T | T[] | undefined): T[] {
-    if (!dados) return [];
-    return Array.isArray(dados) ? dados : [dados];
-  }
+					logger.info(`Relação ${relacao.collection}.${relacao.field} criada com sucesso.`);
+				}
+			} catch (erro: unknown) {
+				logger.error(`Erro ao processar relação ${relacao.collection}.${relacao.field}:`, erro);
+				throw erro;
+			}
+		}
+	}
+
+	/**
+	 * Cadastra dados iniciais se necessário
+	 */
+	async function cadastrarDadosIniciais(esquema: SchemaOverview, logger: any): Promise<void> {
+		const { ItemsService } = services;
+
+		const servicoPais = new ItemsService('pais', {
+			knex: database,
+			schema: esquema,
+		});
+
+		const itens = await servicoPais.readByQuery({
+			fields: ['id'],
+			limit: 1,
+		});
+
+		if (itens.length === 0) {
+			const dadosIniciais = JSON.parse(readInnerFile('seed.json').toString());
+			await servicoPais.createMany(dadosIniciais);
+			logger.info('Dados iniciais de países cadastrados com sucesso.');
+		} else {
+			logger.info('Dados de países já existem, pulando cadastro inicial.');
+		}
+	}
+
+	/**
+	 * Função auxiliar para normalizar dados em arrays
+	 */
+	function normalizarArray<T>(dados: T | T[] | undefined): T[] {
+		if (!dados) return [];
+		return Array.isArray(dados) ? dados : [dados];
+	}
 });
 
 // ✅ Exportação tipada e estável — elimina o erro TS2742
 export default hook;
-
-
-
 
 // import {
 //   defineHook,

@@ -1,0 +1,30 @@
+# Dependências
+node_modules/
+pnpm-lock.yaml
+
+# Build
+dist/
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test
+coverage/
+.nyc_output/
+
+# Outros
+.env
+.env.*
+!.env.example

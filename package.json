@@ -1,15 +1,24 @@
 {
 	"name": "directus-extension-endereco-br",
-	"description": "Extensão do Directus para trabalhar com endereços do Brasil",
-	"icon": "extension",
+	"description": "Extensão do Directus para trabalhar com endereços brasileiros, incluindo CEP, estados, cidades e bairros",
+	"icon": "location_on",
+	"type": "module",
+	"private": false,
 	"version": "1.0.0",
-	"license": "MIT",
 	"keywords": [
 		"directus",
 		"directus-extension",
-		"directus-custom-bundle"
+		"directus-bundle",
+		"brasil",
+		"brazil",
+		"cep",
+		"endereco",
+		"address",
+		"viacep",
+		"ibge",
+		"geolocation"
 	],
-	"type": "module",
+	"license": "MIT",
 	"directus:extension": {
 		"type": "bundle",
 		"path": {
@@ -20,78 +29,105 @@
 			{
 				"type": "endpoint",
 				"name": "pesquisa-cep",
-				"source": "src/pesquisa-cep-endpoint/index.ts"
+				"source": "src/endpoints/pesquisa-cep-endpoint/index.ts"
 			},
 			{
 				"type": "hook",
 				"name": "endereco_br_hook",
-				"source": "src/endereco_br_hook/index.ts"
+				"source": "src/hooks/endereco_br_hook/index.ts"
 			},
 			{
 				"type": "hook",
 				"name": "db-configuration-hook",
 				"source": "src/db-configuration-hook/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "endereco-br-setup",
+				"source": "src/hooks/endereco-br-setup/index.ts"
 			}
 		],
 		"host": "^10.3.4"
 	},
 	"scripts": {
-		"build": "pnpm run clean && pnpm run build:esm",
-		"build:esm": "tsc -p ./tsconfig.esm.json && [ -f dist/esm/index.js ] && mv dist/esm/index.js dist/esm/index.mjs || true",
+		"build": "directus-extension build",
 		"dev": "directus-extension build -w --no-minify",
 		"link": "directus-extension link",
-		"add": "directus-extension add",
 		"validate": "directus-extension validate",
-		"test": "vitest run --reporter=verbose",
-		"test:watch": "vitest --reporter=verbose",
-		"test:single": "vitest run --reporter=verbose",
+		"lint": "eslint . --ext .ts",
+		"lint:fix": "eslint . --ext .ts --fix",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"typecheck": "tsc --noEmit",
+		"test": "vitest run",
+		"test:integration": "vitest run src/tests/*.integration.spec.ts",
+		"test:unit": "vitest run src/tests/*.spec.ts --exclude src/tests/*.integration.spec.ts",
+		"test:watch": "vitest",
+		"test:coverage": "vitest run --coverage",
 		"clean": "rm -rf ./dist",
 		"prepack": "pnpm run build",
-		"semantic-release": "semantic-release",
-		"format": "prettier --write .",
-		"lint": "prettier --check .",
-		"typecheck": "tsc --noEmit -p ./tsconfig.esm.json"
+		"semantic-release": "semantic-release"
 	},
 	"devDependencies": {
-		"@directus/extensions-sdk": "^13.1.1",
-		"@directus/tsconfig": "^3.0.0",
-		"@directus/types": "^13.2.3",
-		"@types/node": "^22.18.12",
-		"@typescript-eslint/eslint-plugin": "^8.46.2",
-		"@typescript-eslint/parser": "^8.46.2",
-		"eslint": "^9.38.0",
+		"@directus/extensions-sdk": "^17.0.3",
+		"@eslint/js": "^9.39.1",
+		"@semantic-release/git": "^10.0.1",
+		"@semantic-release/github": "^12.0.2",
+		"@semantic-release/npm": "^13.1.2",
+		"@types/node": "^24.10.1",
+		"dotenv": "^17.2.3",
+		"eslint": "^9.39.1",
 		"eslint-config-prettier": "^10.1.8",
-		"eslint-plugin-vue": "^10.5.1",
+		"globals": "^16.5.0",
 		"prettier": "^3.6.2",
-		"taskin": "^1.0.9",
-		"tsup": "^8.5.0",
+		"rollup": "^4.53.3",
+		"semantic-release": "^25.0.2",
 		"typescript": "^5.9.3",
-		"vitest": "^3.2.4",
-		"vue-eslint-parser": "^10.2.0"
+		"typescript-eslint": "^8.47.0",
+		"vite": "^7.2.4",
+		"vitest": "^4.0.13"
 	},
 	"dependencies": {
-		"@directus/api": "^29.1.1",
-		"@directus/errors": "^2.0.4",
-		"@directus/extensions": "^3.0.11",
-		"axios": "^1.12.2",
-		"node-fetch": "^3.3.2",
-		"vue": "^3.5.22"
+		"axios": "^1.13.2"
 	},
 	"files": [
-		"dist/",
-		"package.json"
+		"dist/**/*",
+		"files/seed.json",
+		"files/state.json",
+		"package.json",
+		"README.md"
 	],
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org/",
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/devix-tecnologia/directus-extension-endereco-br.git"
+	},
+	"packageManager": "pnpm@10.20.0",
+	"engines": {
+		"node": ">=20",
+		"pnpm": ">=9.0.0"
+	},
+	"author": "Devix Tecnologia",
+	"contributors": [
+		{
+			"name": "Sidarta Veloso",
+			"github": "https://github.com/sidartaveloso",
+			"linkedin": "https://www.linkedin.com/in/sidartaveloso"
+		}
+	],
+	"bugs": {
+		"url": "https://github.com/devix-tecnologia/directus-extension-endereco-br/issues"
+	},
+	"homepage": "https://github.com/devix-tecnologia/directus-extension-endereco-br#readme",
 	"prettier": {
 		"singleQuote": true,
 		"trailingComma": "es5",
 		"printWidth": 100,
 		"semi": true,
-		"tabWidth": 2
-	},
-	"lint-staged": {
-		"*.{ts,vue}": [
-			"eslint --fix",
-			"prettier --write"
-		]
+		"tabWidth": 2,
+		"useTabs": true
 	}
 }
