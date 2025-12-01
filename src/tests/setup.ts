@@ -133,6 +133,7 @@ async function waitForContainerHealth(containerName: string, retries = 100, dela
 			const { stdout } = await execAsync(
 				`docker inspect --format='{{.State.Health.Status}}' ${containerName}`
 			);
+
 			const healthStatus = stdout.trim();
 
 			if (healthStatus === 'healthy') {

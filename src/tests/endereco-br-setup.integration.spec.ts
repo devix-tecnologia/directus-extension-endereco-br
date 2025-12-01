@@ -268,6 +268,7 @@ describe('Auto Setup Hook - Criação de Coleções', () => {
 
 		// Verificar quantidade de estados
 		const expectedEstadosCount = seedData[0].estados.length;
+
 		expect(estados.length, `Deveria ter ${expectedEstadosCount} estados`).toBeGreaterThanOrEqual(
 			expectedEstadosCount
 		);
@@ -276,6 +277,7 @@ describe('Auto Setup Hook - Criação de Coleções', () => {
 		const sp = estados.find(
 			(e: { sigla: string; nome: string; codigo_ibge: string }) => e.sigla === 'SP'
 		);
+
 		expect(sp, 'Estado São Paulo (SP) deveria existir').toBeDefined();
 		expect(sp.nome).toBe('São Paulo');
 		expect(sp.codigo_ibge).toBe('35');
@@ -283,6 +285,7 @@ describe('Auto Setup Hook - Criação de Coleções', () => {
 		const rj = estados.find(
 			(e: { sigla: string; nome: string; codigo_ibge: string }) => e.sigla === 'RJ'
 		);
+
 		expect(rj, 'Estado Rio de Janeiro (RJ) deveria existir').toBeDefined();
 		expect(rj.nome).toBe('Rio de Janeiro');
 		expect(rj.codigo_ibge).toBe('33');

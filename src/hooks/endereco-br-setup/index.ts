@@ -444,6 +444,7 @@ async function popularDadosIniciais({ services, logger, database, getSchema }: S
 					logger.info(
 						`[Endereço BR Extension] ⏭️  País ${paisData.nome} (${paisData.sigla}) já existe`
 					);
+
 					paisId = paisExistente.id;
 				} else {
 					// Criar país
