@@ -49,6 +49,7 @@ const enderecoBrHook: ReturnType<typeof defineHook> = defineHook(
 				apiExtensionContext.logger.warn(
 					'Variável de ambiente GEOLOCATION_AUTH_TOKEN não definida!'
 				);
+
 				return;
 			}
 
@@ -75,6 +76,7 @@ const enderecoBrHook: ReturnType<typeof defineHook> = defineHook(
 				apiExtensionContext.logger.warn(
 					'Variável de ambiente GEOLOCATION_AUTH_TOKEN não definida!'
 				);
+
 				return;
 			}
 
