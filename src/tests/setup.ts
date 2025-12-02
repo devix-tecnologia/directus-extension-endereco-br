@@ -139,7 +139,7 @@ async function cleanupDocker(_testSuiteId: string) {
 	}
 }
 
-async function waitForContainerHealth(containerName: string, retries = 60, delay = 1000) {
+async function waitForContainerHealth(containerName: string, retries = 120, delay = 1000) {
 	for (let i = 0; i < retries; i++) {
 		try {
 			const { stdout } = await execAsync(
@@ -238,7 +238,7 @@ export async function teardownTestEnvironment(_testSuiteId: string = 'main') {
 	}
 }
 
-async function waitForBootstrap(testSuiteId: string, retries = 45, delay = 1000) {
+async function waitForBootstrap(testSuiteId: string, retries = 60, delay = 1000) {
 	for (let i = 0; i < retries; i++) {
 		try {
 			logger.debug(`Connection attempt ${i + 1}/${retries}`);

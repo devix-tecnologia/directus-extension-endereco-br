@@ -13,7 +13,7 @@ describe.each(directusVersions)('Endereco BR Integration Tests - Directus %s', (
 		accessToken = await setupTestEnvironment(testSuiteId);
 		process.env.DIRECTUS_ACCESS_TOKEN = accessToken;
 		console.log(`✅ Directus ${version} setup complete!`);
-	}, 90000); // 90s timeout para setup
+	}, 180000); // 3min timeout para setup (container + bootstrap)
 
 	afterAll(async () => {
 		console.log(`🧹 Cleaning up Directus ${version}...`);
