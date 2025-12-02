@@ -5,6 +5,24 @@
 	"type": "module",
 	"private": false,
 	"version": "1.3.0",
+	"exports": {
+		".": {
+			"import": "./dist/api.js",
+			"types": "./dist/index.d.ts"
+		},
+		"./services/bairro": {
+			"import": "./dist/api.js",
+			"types": "./dist/index.d.ts"
+		},
+		"./services/viacep": {
+			"import": "./dist/api.js",
+			"types": "./dist/index.d.ts"
+		},
+		"./types": {
+			"import": "./dist/api.js",
+			"types": "./dist/index.d.ts"
+		}
+	},
 	"keywords": [
 		"directus",
 		"directus-extension",
