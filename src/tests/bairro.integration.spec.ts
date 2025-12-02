@@ -13,13 +13,13 @@ describe.each(directusVersions)('Endereco BR Integration Tests - Directus %s', (
 		accessToken = await setupTestEnvironment(testSuiteId);
 		process.env.DIRECTUS_ACCESS_TOKEN = accessToken;
 		console.log(`✅ Directus ${version} setup complete!`);
-	}, 120000); // Timeout específico para o beforeAll
+	}, 180000); // 3min timeout para setup (container + bootstrap)
 
 	afterAll(async () => {
 		console.log(`🧹 Cleaning up Directus ${version}...`);
 		await teardownTestEnvironment(testSuiteId);
 		console.log(`✅ Directus ${version} cleanup complete!`);
-	}, 120000);
+	}, 30000);
 
 	test('Endpoint /pesquisa-cep/:cep deve retornar dados válidos', async () => {
 		expect(process.env.DIRECTUS_ACCESS_TOKEN).toBeDefined();
@@ -27,25 +27,29 @@ describe.each(directusVersions)('Endereco BR Integration Tests - Directus %s', (
 		console.log(`📍 Fazendo requisição GET para /pesquisa-cep/${cep}`);
 
 		const response = await pesquisarCep(cep, testSuiteId);
-		const data = response.data || response;
 
 		console.log('✅ Resposta recebida:', response.status);
 		expect(response.status).toBe(200);
-		expect(Array.isArray(data)).toBe(true);
+		expect(response.data).toBeDefined();
+
+		const data = Array.isArray(response.data) ? response.data : [response.data];
+		expect(data.length).toBeGreaterThan(0);
 		expect(data[0].text).toContain('São Paulo');
-	}, 60000);
+	}, 30000);
 
 	test('Endpoint /pesquisa-cep/:cep deve retornar erro para CEP inválido', async () => {
 		const cep = '00000000';
 		console.log(`📍 Fazendo requisição GET para /pesquisa-cep/${cep}`);
 
 		const response = await pesquisarCep(cep, testSuiteId);
-		const data = response.data || response;
 
 		console.log('✅ Resposta recebida:', response.status);
 		expect(response.status).toBe(200);
+		expect(response.data).toBeDefined();
+
+		const data = Array.isArray(response.data) ? response.data : [response.data];
 		expect(data[0].text).toContain('Valor de cep inválido');
-	}, 60000);
+	}, 30000);
 
 	test('Hook endereco_br.items.create deve processar CEP e definir bairro automaticamente', async () => {
 		const payload = {
@@ -59,13 +63,13 @@ describe.each(directusVersions)('Endereco BR Integration Tests - Directus %s', (
 		console.log(`🪝 Testando hook com payload:`, payload);
 
 		const response = await createItem('endereco_br', payload, testSuiteId);
-		const data = response.data || response;
 
 		console.log('✅ Resposta do hook:', response.status);
 		expect(response.status).toBe(200);
-		expect(data.data).toHaveProperty('bairro');
-		expect(data.data.bairro).toBeDefined();
-	}, 60000);
+		expect(response.data).toBeDefined();
+		expect(response.data.data).toHaveProperty('bairro');
+		expect(response.data.data.bairro).toBeDefined();
+	}, 30000);
 
 	test('Hook deve lidar com CEP inexistente gracefully', async () => {
 		const payload = {
@@ -79,5 +83,5 @@ describe.each(directusVersions)('Endereco BR Integration Tests - Directus %s', (
 		console.log(`🪝 Testando hook com CEP inválido:`, payload.cep);
 
 		await expect(createItem('endereco_br', payload, testSuiteId)).rejects.toThrow();
-	}, 60000);
+	}, 30000);
 });

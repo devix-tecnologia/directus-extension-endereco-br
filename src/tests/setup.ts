@@ -58,9 +58,16 @@ const options = {
 };
 ${data ? `const postData = "${dataJson}"; options.headers['Content-Type'] = 'application/json'; options.headers['Content-Length'] = Buffer.byteLength(postData);` : ''}
 const req = http.request(options, (res) => {
-  let data = '';
-  res.on('data', (chunk) => { data += chunk; });
-  res.on('end', () => { console.log(data); });
+  let responseData = '';
+  res.on('data', (chunk) => { responseData += chunk; });
+  res.on('end', () => {
+    try {
+      const parsed = responseData ? JSON.parse(responseData) : {};
+      console.log(JSON.stringify({ status: res.statusCode, data: parsed }));
+    } catch(e) {
+      console.log(JSON.stringify({ status: res.statusCode, data: responseData }));
+    }
+  });
 });
 req.on('error', (error) => { console.error(JSON.stringify({error: error.message})); process.exit(1); });
 ${data ? `req.write(postData);` : ''}
@@ -73,12 +80,20 @@ req.end();
 	try {
 		const { stdout } = await execAsync(fullCommand);
 
-		// Se stdout estiver vazio, retornar objeto vazio ao invés de tentar fazer parse
+		// Se stdout estiver vazio, retornar erro 500
 		if (!stdout || stdout.trim() === '') {
-			return {};
+			return { status: 500, data: {} };
 		}
 
-		return JSON.parse(stdout);
+		const result = JSON.parse(stdout);
+
+		// Se result já tem status, retornar como está
+		if (result.status !== undefined) {
+			return result;
+		}
+
+		// Fallback: se não tem status, assume 200 e coloca tudo em data
+		return { status: 200, data: result };
 	} catch (error: any) {
 		logger.error('Docker HTTP request failed:', error);
 		throw error;
@@ -118,16 +133,13 @@ async function cleanupDocker(_testSuiteId: string) {
 			logger.debug('Network does not exist or already removed', error);
 		}
 
-		// Aguarda um pouco para garantir que as portas foram liberadas
-		await new Promise((resolve) => setTimeout(resolve, 1000));
-
 		logger.debug('Test containers removed');
 	} catch (error) {
 		logger.warn('Warning while cleaning test containers:', error);
 	}
 }
 
-async function waitForContainerHealth(containerName: string, retries = 100, delay = 2000) {
+async function waitForContainerHealth(containerName: string, retries = 120, delay = 1000) {
 	for (let i = 0; i < retries; i++) {
 		try {
 			const { stdout } = await execAsync(
@@ -226,7 +238,7 @@ export async function teardownTestEnvironment(_testSuiteId: string = 'main') {
 	}
 }
 
-async function waitForBootstrap(testSuiteId: string, retries = 90, delay = 2000) {
+async function waitForBootstrap(testSuiteId: string, retries = 60, delay = 1000) {
 	for (let i = 0; i < retries; i++) {
 		try {
 			logger.debug(`Connection attempt ${i + 1}/${retries}`);

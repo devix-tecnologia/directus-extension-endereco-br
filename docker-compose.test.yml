@@ -39,10 +39,10 @@ services:
           '--spider',
           'http://0.0.0.0:8055/server/health',
         ]
-      interval: 3s
-      timeout: 3s
-      retries: 40
-      start_period: 60s
+      interval: 2s
+      timeout: 2s
+      retries: 50
+      start_period: 50s
 
 networks:
   directus-test-network:

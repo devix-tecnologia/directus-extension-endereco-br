@@ -9,31 +9,25 @@ describe('BairroService Unit Tests', () => {
 	let mockReadByQueryEstado: ReturnType<typeof vi.fn>;
 
 	beforeEach(() => {
-		// Criar mocks das funções
-		mockCreateOne = vi.fn();
-		mockReadByQueryCidade = vi.fn();
-		mockReadByQueryEstado = vi.fn();
+		// Criar mocks das funções com implementação padrão
+		mockCreateOne = vi.fn(async () => 'default-id');
+		mockReadByQueryCidade = vi.fn(async () => []);
+		mockReadByQueryEstado = vi.fn(async () => []);
 
-		// Mocks dos serviços
-		const mockItemsService = {
-			createOne: mockCreateOne,
-		};
-
-		const mockCidadeService = {
-			readByQuery: mockReadByQueryCidade,
-		};
-
-		const mockEstadoService = {
-			readByQuery: mockReadByQueryEstado,
-		};
+		// Mock da classe ItemsService
+		const MockItemsServiceClass = vi.fn(function (this: any, collection: string) {
+			if (collection === 'bairro') {
+				this.createOne = mockCreateOne;
+			} else if (collection === 'cidade') {
+				this.readByQuery = mockReadByQueryCidade;
+			} else if (collection === 'estado') {
+				this.readByQuery = mockReadByQueryEstado;
+			}
+		});
 
 		const ctx: ApiExtensionContext = {
 			services: {
-				ItemsService: vi.fn((collection: string) => {
-					if (collection === 'bairro') return mockItemsService;
-					if (collection === 'cidade') return mockCidadeService;
-					if (collection === 'estado') return mockEstadoService;
-				}),
+				ItemsService: MockItemsServiceClass as any,
 			},
 		} as unknown as ApiExtensionContext;
 
