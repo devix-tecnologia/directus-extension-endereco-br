@@ -43,7 +43,7 @@ importers:
         specifier: ^16.5.0
         version: 16.5.0
       prettier:
-        specifier: ^3.6.2
+        specifier: ^3.7.3
         version: 3.7.3
       rollup:
         specifier: ^4.53.3
@@ -58,13 +58,13 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       typescript-eslint:
-        specifier: ^8.47.0
+        specifier: ^8.48.0
         version: 8.48.0(eslint@9.39.1)(typescript@5.9.3)
       vite:
-        specifier: ^7.2.4
+        specifier: ^7.2.6
         version: 7.2.6(@types/node@24.10.1)(terser@5.44.1)
       vitest:
-        specifier: ^4.0.13
+        specifier: ^4.0.14
         version: 4.0.14(@types/node@24.10.1)(terser@5.44.1)
 
 packages:
@@ -2452,6 +2452,15 @@ packages:
 
   inquirer@12.11.0:
     resolution: {integrity: sha512-E5oT7r+NxIxTuZsl/2Hg76kdT57DGc5mn5pCEz0LqZjR8hN7prgMXhUZ6A7rj/qL3X4P5lToIWNkO10uZJSzdA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@types/node': '>=18'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
+  inquirer@12.11.1:
+    resolution: {integrity: sha512-9VF7mrY+3OmsAfjH3yKz/pLbJ5z22E23hENKw3/LNSaA/sAt3v49bDRY+Ygct1xwuKT+U+cBfTzjCPySna69Qw==}
     engines: {node: '>=18'}
     peerDependencies:
       '@types/node': '>=18'
@@ -6953,6 +6962,18 @@ snapshots:
     optionalDependencies:
       '@types/node': 24.10.1
 
+  inquirer@12.11.1(@types/node@24.10.1):
+    dependencies:
+      '@inquirer/ansi': 1.0.2
+      '@inquirer/core': 10.3.2(@types/node@24.10.1)
+      '@inquirer/prompts': 7.10.1(@types/node@24.10.1)
+      '@inquirer/type': 3.0.10(@types/node@24.10.1)
+      mute-stream: 2.0.0
+      run-async: 4.0.6
+      rxjs: 7.8.2
+    optionalDependencies:
+      '@types/node': 24.10.1
+
   interpret@2.2.0: {}
 
   into-stream@7.0.0:
@@ -8119,7 +8140,7 @@ snapshots:
       chalk: 5.6.2
       commander: 12.1.0
       express: 4.22.1
-      inquirer: 12.11.0(@types/node@24.10.1)
+      inquirer: 12.11.1(@types/node@24.10.1)
       play-sound: 1.1.6
       ws: 8.18.3
       zod: 3.25.76
