@@ -98,7 +98,9 @@ _Cadastro automático de bairro e cidades incluindo informações do IBGE_
 
 ## 🤝 Contribuição
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
+Contribuições são bem-vindas! Para contribuir com código, consulte o [Guia de Contribuição](CONTRIBUTING.md) com instruções detalhadas sobre desenvolvimento, testes e padrões de código.
+
+Para reportar bugs ou sugerir funcionalidades, abra uma [issue](https://github.com/devix-tecnologia/directus-extension-endereco-br/issues).
 
 ## 📄 Licença
 
