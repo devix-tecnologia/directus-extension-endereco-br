@@ -1,0 +1,40 @@
+name: Integration Tests
+
+on:
+  workflow_dispatch: # Permite execução manual quando necessário
+
+jobs:
+  integration-test:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.24.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Run integration tests
+        run: pnpm run test:integration:fast
+        env:
+          DIRECTUS_TEST_VERSION: latest
+
+      - name: Cleanup Docker
+        if: always()
+        run: docker system prune -af

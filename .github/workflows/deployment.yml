@@ -1,42 +1,63 @@
 name: Version and publish package
+
 on:
   push:
     branches: [main]
 
 permissions:
-  contents: read #  for checkout
+  contents: read
 
 jobs:
   release:
-    permissions:
-      contents: write #  to be able to publish a GitHub release
-      issues: write #  to be able to comment on released issues
-      pull-requests: write #  to be able to comment on released pull requests
-    name: release
+    name: Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # for provenance
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 22
-        uses: actions/setup-node@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for semantic-release
+          persist-credentials: false
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.24.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22.x
           cache: 'pnpm'
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 10.24.0
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Type check
+        run: pnpm run typecheck
+
+      - name: Run tests
+        run: pnpm run test:unit
+
       - name: Build
         run: pnpm run build
+
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v4
         with:
-          semantic_version: latest
+          semantic_version: 25.0.2
           extra_plugins: |
-            @semantic-release/git@latest
-            @semantic-release/github@latest
-            @semantic-release/npm@latest
+            @semantic-release/git@10.0.1
+            @semantic-release/github@12.0.2
+            @semantic-release/npm@13.1.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.SEMANTIC_RELEASE_BOT_NPM_TOKEN }}

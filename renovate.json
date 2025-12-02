@@ -1,0 +1,38 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["config:recommended"],
+	"timezone": "America/Sao_Paulo",
+	"schedule": ["after 9am and before 5pm every weekday"],
+	"minimumReleaseAge": "5 days",
+	"prConcurrentLimit": 1,
+	"prCreation": "immediate",
+	"automerge": false,
+	"platformAutomerge": false,
+	"labels": ["dependencies", "renovate"],
+	"commitMessagePrefix": "chore(deps):",
+	"separateMajorMinor": true,
+	"separateMinorPatch": false,
+	"packageRules": [
+		{
+			"description": "Agrupa todas as dependências em um único PR",
+			"matchPackagePatterns": ["*"],
+			"groupName": "all dependencies",
+			"groupSlug": "all"
+		},
+		{
+			"description": "Updates do Directus tem prioridade",
+			"matchPackagePatterns": ["@directus/*"],
+			"priority": 10
+		},
+		{
+			"description": "Ignora atualizações unstable/beta/alpha",
+			"matchPackagePatterns": ["*"],
+			"ignoreUnstable": true
+		}
+	],
+	"vulnerabilityAlerts": {
+		"enabled": true,
+		"minimumReleaseAge": "0 days",
+		"labels": ["security"]
+	}
+}
