@@ -1,6 +1,6 @@
 {
 	"name": "directus-extension-endereco-br",
-	"description": "Extensão do Directus para trabalhar com endereços brasileiros, incluindo CEP, estados, cidades e bairros",
+	"description": "Extensão do Directus para trabalhar com endereços brasileiros, incluindo CEP, estados, cidades, bairros e geolocalização",
 	"icon": "location_on",
 	"type": "module",
 	"private": false,
