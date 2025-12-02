@@ -10,12 +10,17 @@ Obrigado por considerar contribuir com a extensão de Endereços Brasileiros par
 - pnpm >= 9.0.0
 - Docker e Docker Compose (para testes de integração)
 
+**Recomendado**: Use [asdf](https://asdf-vm.com/) para gerenciar versões de Node.js e pnpm. O projeto inclui um arquivo `.tool-versions` com as versões recomendadas.
+
 ### Instalação
 
 ```bash
 # Clone o repositório
 git clone https://github.com/devix-tecnologia/directus-extension-endereco-br.git
 cd directus-extension-endereco-br
+
+# (Opcional) Se usar asdf, instale as versões recomendadas
+asdf install
 
 # Instale as dependências
 pnpm install
