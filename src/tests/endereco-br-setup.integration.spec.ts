@@ -26,7 +26,7 @@ interface Relation {
 }
 
 describe('Auto Setup Hook - Criação de Coleções', () => {
-	const version = process.env.DIRECTUS_TEST_VERSION || '10.8.3';
+	const version = process.env.DIRECTUS_TEST_VERSION || 'latest';
 	const testSuiteId = 'setup';
 
 	beforeAll(async () => {
