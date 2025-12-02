@@ -70,7 +70,9 @@
 		"semantic-release": "semantic-release"
 	},
 	"devDependencies": {
+		"@directus/extensions": "^3.0.14",
 		"@directus/extensions-sdk": "^17.0.3",
+		"@directus/types": "^13.4.0",
 		"@eslint/js": "^9.39.1",
 		"@semantic-release/git": "^10.0.1",
 		"@semantic-release/github": "^12.0.2",

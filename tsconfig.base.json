@@ -10,7 +10,8 @@
 		"declarationMap": true,
 		"allowSyntheticDefaultImports": true,
 		"resolveJsonModule": true,
-		"types": ["jest", "node"],
+		"resolvePackageJsonImports": true,
+		"types": ["node"],
 		"isolatedModules": true
 	},
 	"include": ["src/**/*"]

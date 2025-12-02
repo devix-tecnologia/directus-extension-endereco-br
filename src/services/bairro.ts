@@ -46,7 +46,7 @@ export class BairroService {
 			limit: -1,
 		});
 
-		bairros.forEach((bairro) => {
+		bairros.forEach((bairro: Bairro) => {
 			bairro.nome = this.lowerCaseSemAcentos(bairro.nome);
 			bairro.cidade.nome = this.lowerCaseSemAcentos(bairro.cidade.nome);
 			bairro.cidade.estado.nome = this.lowerCaseSemAcentos(bairro.cidade.estado.nome);

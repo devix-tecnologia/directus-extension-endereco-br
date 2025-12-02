@@ -1,6 +1,6 @@
 import { defineHook } from '@directus/extensions-sdk';
-import schema from '../../../files/state.json';
-import seedData from '../../../files/seed.json';
+import schema from '../../../files/state.json' with { type: 'json' };
+import seedData from '../../../files/seed.json' with { type: 'json' };
 
 interface SetupContext {
 	services: any;

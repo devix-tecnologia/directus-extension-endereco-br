@@ -12,9 +12,15 @@ importers:
         specifier: ^1.13.2
         version: 1.13.2
     devDependencies:
+      '@directus/extensions':
+        specifier: ^3.0.14
+        version: 3.0.14(knex@3.1.0)(vue@3.5.24(typescript@5.9.3))(ws@8.18.3)
       '@directus/extensions-sdk':
         specifier: ^17.0.3
         version: 17.0.3(@types/node@24.10.1)(@unhead/vue@1.11.20(vue@3.5.24(typescript@5.9.3)))(knex@3.1.0)(pinia@2.3.1(typescript@5.9.3)(vue@3.5.24(typescript@5.9.3)))(terser@5.44.1)(typescript@5.9.3)(ws@8.18.3)
+      '@directus/types':
+        specifier: ^13.4.0
+        version: 13.4.0(knex@3.1.0)(vue@3.5.24(typescript@5.9.3))(ws@8.18.3)
       '@eslint/js':
         specifier: ^9.39.1
         version: 9.39.1
