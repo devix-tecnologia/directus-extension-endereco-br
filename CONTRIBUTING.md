@@ -56,6 +56,7 @@ pnpm test:integration:fast
 ```
 
 **⚠️ Nota importante**: Os testes de integração:
+
 - Requerem Docker e Docker Compose instalados
 - Podem levar ~2 minutos para iniciar o Directus
 - NÃO rodam automaticamente no CI (GitHub Actions tem limitações com Docker)
@@ -110,6 +111,7 @@ pnpm clean
 O projeto utiliza os seguintes workflows:
 
 #### 1. **CI** (`ci.yml`)
+
 - **Quando**: Pull Requests para `main` ou `develop`
 - **O que faz**:
   - Lint
@@ -118,6 +120,7 @@ O projeto utiliza os seguintes workflows:
   - Build
 
 #### 2. **Deployment** (`deployment.yml`)
+
 - **Quando**: Push para branch `main`
 - **O que faz**:
   - Job 1 (Test): Valida código (lint, typecheck, unit tests, build)
@@ -125,6 +128,7 @@ O projeto utiliza os seguintes workflows:
 - **Nota**: Semantic release analisa os commits e gera versão automaticamente
 
 #### 3. **Integration Tests** (`integration-tests.yml`)
+
 - **Quando**: Execução manual (workflow_dispatch)
 - **O que faz**: Roda testes de integração contra múltiplas versões do Directus
 - **Por que manual**: Docker é instável no GitHub Actions (timeouts frequentes)
