@@ -133,16 +133,13 @@ async function cleanupDocker(_testSuiteId: string) {
 			logger.debug('Network does not exist or already removed', error);
 		}
 
-		// Aguarda um pouco para garantir que as portas foram liberadas
-		await new Promise((resolve) => setTimeout(resolve, 1000));
-
 		logger.debug('Test containers removed');
 	} catch (error) {
 		logger.warn('Warning while cleaning test containers:', error);
 	}
 }
 
-async function waitForContainerHealth(containerName: string, retries = 100, delay = 2000) {
+async function waitForContainerHealth(containerName: string, retries = 60, delay = 1000) {
 	for (let i = 0; i < retries; i++) {
 		try {
 			const { stdout } = await execAsync(
@@ -241,7 +238,7 @@ export async function teardownTestEnvironment(_testSuiteId: string = 'main') {
 	}
 }
 
-async function waitForBootstrap(testSuiteId: string, retries = 90, delay = 2000) {
+async function waitForBootstrap(testSuiteId: string, retries = 45, delay = 1000) {
 	for (let i = 0; i < retries; i++) {
 		try {
 			logger.debug(`Connection attempt ${i + 1}/${retries}`);
