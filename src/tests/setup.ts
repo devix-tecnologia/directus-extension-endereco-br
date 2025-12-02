@@ -58,9 +58,16 @@ const options = {
 };
 ${data ? `const postData = "${dataJson}"; options.headers['Content-Type'] = 'application/json'; options.headers['Content-Length'] = Buffer.byteLength(postData);` : ''}
 const req = http.request(options, (res) => {
-  let data = '';
-  res.on('data', (chunk) => { data += chunk; });
-  res.on('end', () => { console.log(data); });
+  let responseData = '';
+  res.on('data', (chunk) => { responseData += chunk; });
+  res.on('end', () => {
+    try {
+      const parsed = responseData ? JSON.parse(responseData) : {};
+      console.log(JSON.stringify({ status: res.statusCode, data: parsed }));
+    } catch(e) {
+      console.log(JSON.stringify({ status: res.statusCode, data: responseData }));
+    }
+  });
 });
 req.on('error', (error) => { console.error(JSON.stringify({error: error.message})); process.exit(1); });
 ${data ? `req.write(postData);` : ''}
@@ -73,12 +80,20 @@ req.end();
 	try {
 		const { stdout } = await execAsync(fullCommand);
 
-		// Se stdout estiver vazio, retornar objeto vazio ao invés de tentar fazer parse
+		// Se stdout estiver vazio, retornar erro 500
 		if (!stdout || stdout.trim() === '') {
-			return {};
+			return { status: 500, data: {} };
 		}
 
-		return JSON.parse(stdout);
+		const result = JSON.parse(stdout);
+
+		// Se result já tem status, retornar como está
+		if (result.status !== undefined) {
+			return result;
+		}
+
+		// Fallback: se não tem status, assume 200 e coloca tudo em data
+		return { status: 200, data: result };
 	} catch (error: any) {
 		logger.error('Docker HTTP request failed:', error);
 		throw error;

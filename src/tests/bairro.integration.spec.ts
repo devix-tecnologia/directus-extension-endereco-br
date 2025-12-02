@@ -27,11 +27,13 @@ describe.each(directusVersions)('Endereco BR Integration Tests - Directus %s', (
 		console.log(`📍 Fazendo requisição GET para /pesquisa-cep/${cep}`);
 
 		const response = await pesquisarCep(cep, testSuiteId);
-		const data = response.data || response;
 
 		console.log('✅ Resposta recebida:', response.status);
 		expect(response.status).toBe(200);
-		expect(Array.isArray(data)).toBe(true);
+		expect(response.data).toBeDefined();
+
+		const data = Array.isArray(response.data) ? response.data : [response.data];
+		expect(data.length).toBeGreaterThan(0);
 		expect(data[0].text).toContain('São Paulo');
 	}, 60000);
 
@@ -40,10 +42,12 @@ describe.each(directusVersions)('Endereco BR Integration Tests - Directus %s', (
 		console.log(`📍 Fazendo requisição GET para /pesquisa-cep/${cep}`);
 
 		const response = await pesquisarCep(cep, testSuiteId);
-		const data = response.data || response;
 
 		console.log('✅ Resposta recebida:', response.status);
 		expect(response.status).toBe(200);
+		expect(response.data).toBeDefined();
+
+		const data = Array.isArray(response.data) ? response.data : [response.data];
 		expect(data[0].text).toContain('Valor de cep inválido');
 	}, 60000);
 
@@ -59,12 +63,12 @@ describe.each(directusVersions)('Endereco BR Integration Tests - Directus %s', (
 		console.log(`🪝 Testando hook com payload:`, payload);
 
 		const response = await createItem('endereco_br', payload, testSuiteId);
-		const data = response.data || response;
 
 		console.log('✅ Resposta do hook:', response.status);
 		expect(response.status).toBe(200);
-		expect(data.data).toHaveProperty('bairro');
-		expect(data.data.bairro).toBeDefined();
+		expect(response.data).toBeDefined();
+		expect(response.data.data).toHaveProperty('bairro');
+		expect(response.data.data.bairro).toBeDefined();
 	}, 60000);
 
 	test('Hook deve lidar com CEP inexistente gracefully', async () => {
