@@ -10,3 +10,4 @@ export { ObterDadosViaCep } from './services/viacep.js';
 
 // Export types for external use
 export type { Bairro, Cidade, Estado, Endereco, EnderecoComPesquisa } from './utils/types.js';
+export type { ViaCepResult, ViaCepResultSucesso } from './services/viacep.js';
