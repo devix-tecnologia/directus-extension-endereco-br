@@ -8,3 +8,4 @@ driva_upload
 pgadmin4_data
 dist/
 data/
+*.tgz

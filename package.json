@@ -4,7 +4,8 @@
 	"icon": "location_on",
 	"type": "module",
 	"private": false,
-	"version": "1.4.0",
+	"version": "1.4.2",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
 			"import": "./dist/api.js",
@@ -12,15 +13,15 @@
 		},
 		"./services/bairro": {
 			"import": "./dist/api.js",
-			"types": "./dist/index.d.ts"
+			"types": "./dist/services/bairro.d.ts"
 		},
 		"./services/viacep": {
 			"import": "./dist/api.js",
-			"types": "./dist/index.d.ts"
+			"types": "./dist/services/viacep.d.ts"
 		},
 		"./types": {
 			"import": "./dist/api.js",
-			"types": "./dist/index.d.ts"
+			"types": "./dist/utils/types.d.ts"
 		}
 	},
 	"keywords": [
@@ -68,7 +69,7 @@
 		"host": "^10.3.4"
 	},
 	"scripts": {
-		"build": "directus-extension build",
+		"build": "directus-extension build && tsc",
 		"dev": "directus-extension build -w --no-minify",
 		"link": "directus-extension link",
 		"validate": "directus-extension validate",
