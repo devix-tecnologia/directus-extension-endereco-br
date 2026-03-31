@@ -1,16 +1,14 @@
 // Lista de versões do Directus para testes automatizados
-// Este arquivo é gerado automaticamente pelo script de CI
+// Testa compatibilidade com Directus 10.x e 11.x
 export const directusVersions = [
-	// '9.23.1',
-	// '9.22.4',
-	// '9.24.0',
-	// '10.8.3',
-	// '11.10.2',
-	// '11.9.3',
-	// '11.10.0',
-	// '11.11.0',
-	// '11.12.0',
-	'latest',
+	// Directus 10.x - LTS versions
+	'10.13.3', // Latest stable 10.x
+
+	// Directus 11.x - Current versions
+	'11.0.0', // First major release
+	'11.10.0', // Stable mid version
+	'11.17.1', // Target version
+	'latest', // Always test latest
 ];
 
 // Lista de versões bloqueadas (não serão testadas)

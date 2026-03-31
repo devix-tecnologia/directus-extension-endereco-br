@@ -2,7 +2,7 @@
 
 Status: pending  
 Type: chore  
-Assignee: developer  
+Assignee: developer
 
 ## Description
 

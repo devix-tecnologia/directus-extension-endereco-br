@@ -65,7 +65,7 @@
 				"source": "src/hooks/endereco-br-setup/index.ts"
 			}
 		],
-		"host": "^10.3.4"
+		"host": "^10.3.4 || ^11.0.0"
 	},
 	"scripts": {
 		"build": "directus-extension build && tsc",
@@ -80,6 +80,7 @@
 		"test": "vitest run",
 		"test:integration": "vitest run src/tests/*.integration.spec.ts",
 		"test:integration:fast": "DIRECTUS_TEST_VERSION=latest vitest run src/tests/bairro.integration.spec.ts",
+		"test:all-versions": "node scripts/test-all-versions.js",
 		"test:unit": "vitest run --exclude '**/*.integration.spec.ts'",
 		"test:watch": "vitest",
 		"test:coverage": "vitest run --coverage",

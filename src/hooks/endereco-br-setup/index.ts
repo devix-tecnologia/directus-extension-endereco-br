@@ -1,4 +1,5 @@
 import { defineHook } from '@directus/extensions-sdk';
+import { getCurrentDirectusVersion, getCompatibilityMode } from '../../utils/directus-version.js';
 import schema from '../../../files/state.json' with { type: 'json' };
 import seedData from '../../../files/seed.json' with { type: 'json' };
 
@@ -19,7 +20,12 @@ export default defineHook(
 			getSchema,
 		}: { services: any; logger: any; database: any; getSchema: any }
 	) => {
-		logger.info('[Endereço BR Extension] 🔌 Hook registrado, aguardando eventos...');
+		// Detect Directus version for compatibility
+		const version = getCurrentDirectusVersion(logger);
+
+		logger.info(
+			`[Endereço BR Extension] 🔌 Hook registrado em ${getCompatibilityMode(version)}, aguardando eventos...`
+		);
 
 		// Hook no evento de inicialização - executa após as rotas serem registradas
 		init('routes.after', async () => {

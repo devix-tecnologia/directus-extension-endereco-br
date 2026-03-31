@@ -2,7 +2,7 @@
 
 Status: done  
 Type: fix  
-Assignee: Sidarta Veloso  
+Assignee: Sidarta Veloso
 
 ## Description
 

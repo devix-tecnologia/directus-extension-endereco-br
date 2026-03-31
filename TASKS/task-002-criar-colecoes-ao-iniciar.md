@@ -2,7 +2,7 @@
 
 Status: done  
 Type: feat  
-Assignee: Marcos  
+Assignee: Marcos
 
 ## Description
 

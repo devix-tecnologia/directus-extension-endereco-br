@@ -6,7 +6,16 @@
 
 [![Versão npm](https://img.shields.io/npm/v/directus-extension-endereco-br)](https://www.npmjs.com/package/directus-extension-endereco-br)
 [![Licença](https://img.shields.io/github/license/devix-tecnologia/directus-extension-endereco-br)](https://github.com/devix-tecnologia/directus-extension-endereco-br/blob/main/LICENSE)
-[![Compatível com Directus](https://img.shields.io/badge/Directus-%E2%89%A510.10-blue)](https://directus.io/)
+[![Compatível com Directus](https://img.shields.io/badge/Directus-10.x%20%7C%2011.x-blue)](https://directus.io/)
+
+## 🎯 Compatibilidade
+
+Esta extensão é totalmente compatível com:
+
+- ✅ **Directus 10.x** (a partir de 10.3.4)
+- ✅ **Directus 11.x** (todas as versões)
+
+A extensão detecta automaticamente a versão do Directus e adapta seu comportamento para garantir compatibilidade total. Você pode atualizar do Directus 10 para 11 sem precisar alterar a extensão.
 
 ## ✨ Funcionalidades
 

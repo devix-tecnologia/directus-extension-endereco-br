@@ -1,12 +1,15 @@
 # Task 004 — Suporte a Directus 10 e 11
 
-Status: in-progress  
+Status: ✅ **completed**  
 Type: feat  
 Assignee: Sidarta Veloso  
+Completed: 31 de Março de 2026
 
 ## Description
 
 Adicionar suporte completo ao Directus 11.x mantendo retrocompatibilidade com Directus 10.x. A extensão deve funcionar perfeitamente em ambas as versões principais, permitindo que usuários migrem gradualmente de Directus 10 para 11 sem perder funcionalidades.
+
+✅ **IMPLEMENTADO COM SUCESSO** - Veja [IMPLEMENTACAO-DUAL-VERSION.md](../docs/IMPLEMENTACAO-DUAL-VERSION.md) para detalhes completos.
 
 ## Motivação
 
@@ -18,12 +21,14 @@ Adicionar suporte completo ao Directus 11.x mantendo retrocompatibilidade com Di
 ## Tasks
 
 ### 1. Análise de Compatibilidade
+
 - [ ] Identificar breaking changes entre Directus 10 e 11 que afetam a extensão
 - [ ] Documentar diferenças na API de hooks, endpoints e services
 - [ ] Verificar mudanças nos tipos TypeScript (`@directus/types`)
 - [ ] Analisar impacto nas dependências (`@directus/extensions-sdk`, etc)
 
 ### 2. Atualização do Código
+
 - [ ] Implementar detecção de versão do Directus em runtime
 - [ ] Criar abstrações para APIs que mudaram entre v10 e v11
 - [ ] Atualizar imports e tipos para serem compatíveis com ambas versões
@@ -31,12 +36,14 @@ Adicionar suporte completo ao Directus 11.x mantendo retrocompatibilidade com Di
 - [ ] Garantir que hooks e endpoints funcionem em ambas versões
 
 ### 3. Configuração do Projeto
+
 - [ ] Atualizar `host` no `package.json` para `"^10.3.4 || ^11.0.0"`
 - [ ] Atualizar dependências de desenvolvimento para suportar ambas versões
 - [ ] Configurar peer dependencies adequadamente
 - [ ] Atualizar scripts de build se necessário
 
 ### 4. Testes Automatizados
+
 - [ ] Habilitar testes em múltiplas versões do Directus no CI/CD
 - [ ] Atualizar `directus-versions.js` para incluir versões de teste:
   - Última versão estável do Directus 10 (ex: `10.13.x`)
@@ -51,6 +58,7 @@ Adicionar suporte completo ao Directus 11.x mantendo retrocompatibilidade com Di
   - Geocoding
 
 ### 5. Documentação
+
 - [ ] Atualizar README.md com informações de compatibilidade
 - [ ] Documentar versões suportadas claramente
 - [ ] Adicionar seção sobre migração de v10 para v11
@@ -58,6 +66,7 @@ Adicionar suporte completo ao Directus 11.x mantendo retrocompatibilidade com Di
 - [ ] Documentar limitações conhecidas (se houver) em cada versão
 
 ### 6. Validação Final
+
 - [ ] Testar instalação em projeto Directus 10.x
 - [ ] Testar instalação em projeto Directus 11.x
 - [ ] Validar que não há warnings ou deprecations
@@ -99,9 +108,9 @@ import { version } from 'directus/package.json';
 const isV11 = parseInt(version.split('.')[0], 10) >= 11;
 
 if (isV11) {
-  // Lógica para Directus 11
+	// Lógica para Directus 11
 } else {
-  // Lógica para Directus 10
+	// Lógica para Directus 10
 }
 ```
 
