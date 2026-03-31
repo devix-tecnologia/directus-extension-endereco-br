@@ -1,16 +1,8 @@
 # Task 002 — criar colecoes ao iniciar
 
-## Status
-
-done
-
-## Type
-
-feat
-
-## Assignee
-
-Marcos
+Status: done  
+Type: feat  
+Assignee: Marcos  
 
 ## Description
 
