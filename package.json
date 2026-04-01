@@ -4,7 +4,7 @@
 	"icon": "location_on",
 	"type": "module",
 	"private": false,
-	"version": "1.4.2",
+	"version": "1.5.0",
 	"exports": {
 		".": {
 			"import": "./dist/api.js",
