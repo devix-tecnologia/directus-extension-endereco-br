@@ -4,7 +4,7 @@ services:
     container_name: directus-endereco-br-${TEST_SUITE_ID:-main}-${DIRECTUS_VERSION:-latest}
     # Porta mapeada para acesso via navegador após os testes
     ports:
-      - '18055:8055'
+      - '${HOST_PORT:-18055}:8055'
     environment:
       DB_CLIENT: 'sqlite3'
       DB_FILENAME: '/tmp/data/directus.db'

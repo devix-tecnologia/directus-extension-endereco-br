@@ -5,6 +5,17 @@ import { logger } from './test-logger.js';
 
 const execAsync = promisify(exec);
 
+// Porta base para testes - cada suite recebe uma porta diferente
+const suitePortMap: Record<string, number> = {};
+let nextPort = 18055;
+
+function getPortForSuite(suiteId: string): number {
+	if (!suitePortMap[suiteId]) {
+		suitePortMap[suiteId] = nextPort++;
+	}
+	return suitePortMap[suiteId];
+}
+
 // Detecta qual comando docker compose usar (docker-compose ou docker compose)
 let dockerComposeCommand: string | null = null;
 
@@ -89,6 +100,10 @@ req.end();
 
 		// Se result já tem status, retornar como está
 		if (result.status !== undefined) {
+			// Desembrulha resposta do Directus: { status, data: { data: X } } → { status, data: X }
+			if (result.data?.data !== undefined) {
+				return { status: result.status, data: result.data.data };
+			}
 			return result;
 		}
 
@@ -108,8 +123,10 @@ async function cleanupDocker(_testSuiteId: string) {
 		try {
 			const composeCmd = await getDockerComposeCommand();
 
+			const projectName = `endereco-br-${_testSuiteId}`;
+			const hostPort = getPortForSuite(_testSuiteId);
 			await execAsync(
-				`TEST_SUITE_ID=${_testSuiteId} DIRECTUS_VERSION=${process.env.DIRECTUS_VERSION} ${composeCmd} -f docker-compose.test.yml down --remove-orphans --volumes 2>/dev/null || true`
+				`TEST_SUITE_ID=${_testSuiteId} DIRECTUS_VERSION=${process.env.DIRECTUS_VERSION} HOST_PORT=${hostPort} ${composeCmd} -p ${projectName} -f docker-compose.test.yml down --remove-orphans --volumes 2>/dev/null || true`
 			);
 		} catch (error) {
 			logger.debug('Error stopping containers (may not exist):', error);
@@ -177,8 +194,10 @@ export async function setupTestEnvironment(testSuiteId: string = 'main') {
 
 		const composeCmd = await getDockerComposeCommand();
 
+		const projectName = `endereco-br-${testSuiteId}`;
+		const hostPort = getPortForSuite(testSuiteId);
 		const { stdout, stderr } = await execAsync(
-			`TEST_SUITE_ID=${testSuiteId} DIRECTUS_VERSION=${process.env.DIRECTUS_VERSION} ${composeCmd} -f docker-compose.test.yml up -d`
+			`TEST_SUITE_ID=${testSuiteId} DIRECTUS_VERSION=${process.env.DIRECTUS_VERSION} HOST_PORT=${hostPort} ${composeCmd} -p ${projectName} -f docker-compose.test.yml up -d`
 		);
 
 		// Docker Compose uses stderr for progress messages
@@ -229,8 +248,10 @@ export async function teardownTestEnvironment(_testSuiteId: string = 'main') {
 
 		const composeCmd = await getDockerComposeCommand();
 
+		const projectName = `endereco-br-${_testSuiteId}`;
+		const hostPort = getPortForSuite(_testSuiteId);
 		await execAsync(
-			`TEST_SUITE_ID=${_testSuiteId} DIRECTUS_VERSION=${process.env.DIRECTUS_VERSION} ${composeCmd} -f docker-compose.test.yml down --remove-orphans`
+			`TEST_SUITE_ID=${_testSuiteId} DIRECTUS_VERSION=${process.env.DIRECTUS_VERSION} HOST_PORT=${hostPort} ${composeCmd} -p ${projectName} -f docker-compose.test.yml down --remove-orphans`
 		);
 	} catch (error) {
 		logger.error('Erro ao finalizar ambiente de teste:', error);
@@ -254,7 +275,7 @@ async function waitForBootstrap(testSuiteId: string, retries = 60, delay = 1000)
 
 			logger.debug(`Health check response: ${JSON.stringify(healthCheck)}`);
 
-			const status = healthCheck.status || healthCheck.data?.status;
+			const status = healthCheck.data?.status;
 
 			if (status !== 'ok') {
 				throw new Error(`Health check failed: ${status}`);

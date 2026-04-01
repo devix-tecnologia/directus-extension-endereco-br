@@ -5,7 +5,7 @@ import { pesquisarCep, createItem } from './helper_test.js';
 
 describe.each(directusVersions)('Endereco BR Integration Tests - Directus %s', (version) => {
 	let accessToken: string;
-	const testSuiteId = `bairro-${version}`;
+	const testSuiteId = `bairro`;
 
 	beforeAll(async () => {
 		console.log(`🚀 Setting up Directus ${version}...`);
