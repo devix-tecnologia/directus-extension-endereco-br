@@ -7,7 +7,7 @@ services:
 
   directus:
     restart: unless-stopped
-    image: directus/directus:9.23.1
+    image: directus/directus:11.17.1
     environment:
       DB_CLIENT: 'sqlite3'
       DB_HOST: 'database'
