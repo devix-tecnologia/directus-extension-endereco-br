@@ -4,12 +4,13 @@
 	"icon": "location_on",
 	"type": "module",
 	"private": false,
-	"version": "1.5.0",
+	"version": "1.5.2",
 	"exports": {
 		".": {
 			"import": "./dist/api.js",
 			"types": "./dist/index.d.ts"
 		},
+		"./package.json": "./package.json",
 		"./services/bairro": {
 			"import": "./dist/api.js",
 			"types": "./dist/services/bairro.d.ts"
