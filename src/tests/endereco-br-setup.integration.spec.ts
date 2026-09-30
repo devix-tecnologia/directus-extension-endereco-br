@@ -2,6 +2,7 @@ import { describe, test, expect, beforeAll, afterAll } from 'vitest';
 import { setupTestEnvironment, teardownTestEnvironment, dockerHttpRequest } from './setup.js';
 import { getCollections, getRelations, listItems } from './helper_test.js';
 import { logger } from './test-logger.js';
+import { getDirectusTestVersion } from './directus-versions.js';
 import schema from '../../files/state.json';
 import seedData from '../../files/seed.json';
 
@@ -26,7 +27,7 @@ interface Relation {
 }
 
 describe('Auto Setup Hook - Criação de Coleções', () => {
-	const version = process.env.DIRECTUS_TEST_VERSION || 'latest';
+	const version = getDirectusTestVersion();
 	const testSuiteId = 'setup';
 
 	beforeAll(async () => {

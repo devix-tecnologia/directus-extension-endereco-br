@@ -1,7 +1,7 @@
 services:
   directus:
-    image: directus/directus:${DIRECTUS_VERSION:-11.17.1}
-    container_name: directus-endereco-br-${TEST_SUITE_ID:-main}-${DIRECTUS_VERSION:-latest}
+    image: directus/directus:${DIRECTUS_VERSION:-11.17.4}
+    container_name: directus-endereco-br-${TEST_SUITE_ID:-main}-${DIRECTUS_VERSION:-11.17.4}
     # Porta mapeada para acesso via navegador após os testes
     ports:
       - '${HOST_PORT:-18055}:8055'
