@@ -1,6 +1,6 @@
 # Task 004 — Suporte a Directus 10 e 11
 
-Status: ✅ **completed**  
+Status: done  
 Type: feat  
 Assignee: Sidarta Veloso  
 Completed: 31 de Março de 2026
