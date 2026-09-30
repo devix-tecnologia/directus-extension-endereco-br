@@ -55,20 +55,25 @@ export async function dockerHttpRequest(
 	const suiteId = testSuiteId || process.env.TEST_SUITE_ID || 'main';
 	const containerName = `directus-endereco-br-${suiteId}-${process.env.DIRECTUS_VERSION}`;
 
-	// Cria um script Node.js para fazer a requisição HTTP
-	const headersJson = JSON.stringify(headers || {}).replace(/"/g, '\\"');
-	const dataJson = data ? JSON.stringify(data).replace(/"/g, '\\"') : '';
+	// Cria um script Node.js para fazer a requisição HTTP.
+	// Path, headers e corpo vão em base64 para não depender de escape de aspas e barras
+	// (um corpo com JSON aninhado, como `pesquisa_cep`, quebrava o script).
+	const toBase64 = (value: unknown) => Buffer.from(JSON.stringify(value)).toString('base64');
+	const pathB64 = toBase64(path);
+	const headersB64 = toBase64(headers || {});
+	const dataB64 = data ? toBase64(JSON.stringify(data)) : '';
 
 	const nodeScript = `
 const http = require('http');
+const fromBase64 = (value) => JSON.parse(Buffer.from(value, 'base64').toString('utf8'));
 const options = {
   hostname: '127.0.0.1',
   port: 8055,
-  path: '${path}',
+  path: fromBase64('${pathB64}'),
   method: '${method}',
-  headers: JSON.parse("${headersJson}")
+  headers: fromBase64('${headersB64}')
 };
-${data ? `const postData = "${dataJson}"; options.headers['Content-Type'] = 'application/json'; options.headers['Content-Length'] = Buffer.byteLength(postData);` : ''}
+${data ? `const postData = fromBase64('${dataB64}'); options.headers['Content-Type'] = 'application/json'; options.headers['Content-Length'] = Buffer.byteLength(postData);` : ''}
 const req = http.request(options, (res) => {
   let responseData = '';
   res.on('data', (chunk) => { responseData += chunk; });

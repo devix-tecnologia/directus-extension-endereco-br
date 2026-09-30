@@ -10,12 +10,23 @@
 
 ## 🎯 Compatibilidade
 
-Esta extensão é totalmente compatível com:
+Faixa declarada no `package.json` (`directus:extension.host`): `^10.3.4 || ^11.0.0`, ou seja, do Directus 10.3.4 até a última 11.x.
 
-- ✅ **Directus 10.x** (a partir de 10.3.4)
-- ✅ **Directus 11.x** (todas as versões)
+A extensão detecta automaticamente a versão do Directus e adapta seu comportamento. Você pode atualizar do Directus 10 para 11 sem precisar alterar a extensão.
 
-A extensão detecta automaticamente a versão do Directus e adapta seu comportamento para garantir compatibilidade total. Você pode atualizar do Directus 10 para 11 sem precisar alterar a extensão.
+### Matriz validada
+
+Testes unitários e de integração (Docker, imagem oficial `directus/directus`, SQLite) executados com a extensão compilada:
+
+| Directus | Situação    | Observação                                                           |
+| -------- | ----------- | -------------------------------------------------------------------- |
+| 11.17.4  | ✅ Validado | Última 11.x; versão padrão dos testes                                |
+| 11.0.0   | ✅ Validado | Primeira 11.x                                                        |
+| 10.13.4  | ✅ Validado | Última 10.x                                                          |
+| 10.4.2   | ✅ Validado | Menor imagem Docker dentro da faixa (não há imagem 10.3.4 publicada) |
+| 12.x     | ❌ Fora     | Não suportado: a v12 muda a licença do Directus                      |
+
+Para repetir a validação: `pnpm build && pnpm test:all-versions` (ou `DIRECTUS_TEST_VERSION=11.17.4 pnpm test:integration` para uma versão só).
 
 ## ✨ Funcionalidades
 

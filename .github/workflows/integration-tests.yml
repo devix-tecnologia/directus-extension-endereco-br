@@ -31,7 +31,7 @@ jobs:
       - name: Run integration tests
         run: pnpm run test:integration:fast
         env:
-          DIRECTUS_TEST_VERSION: latest
+          DIRECTUS_TEST_VERSION: 11.17.4
 
       - name: Cleanup Docker
         if: always()

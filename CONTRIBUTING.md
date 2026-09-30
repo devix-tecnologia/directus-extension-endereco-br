@@ -48,10 +48,16 @@ pnpm test:coverage
 Testes que validam a integração com o Directus usando Docker:
 
 ```bash
-# Todas as versões configuradas (pode demorar)
+# Todas as suites na versão padrão (Directus 11.17.4)
 pnpm test:integration
 
-# Apenas versão latest (recomendado para desenvolvimento)
+# Outra versão (nunca >= 12, por licença; tags como "latest" são recusadas)
+DIRECTUS_TEST_VERSION=11.0.0 pnpm test:integration
+
+# Toda a matriz de versões (src/tests/directus-versions.js; pode demorar)
+pnpm test:all-versions
+
+# Só a suite de bairro, na versão padrão (mais rápido)
 pnpm test:integration:fast
 ```
 

@@ -10,7 +10,11 @@
  */
 
 import { spawn } from 'child_process';
-import { directusVersions, blockedDirectusVersions } from '../src/tests/directus-versions.js';
+import {
+	directusVersions,
+	blockedDirectusVersions,
+	assertDirectusVersion,
+} from '../src/tests/directus-versions.js';
 
 // ANSI color codes for pretty output
 const colors = {
@@ -76,7 +80,9 @@ async function main() {
 	log('═'.repeat(60), colors.blue);
 
 	// Filter out blocked versions
-	const versionsToTest = directusVersions.filter((v) => !blockedDirectusVersions.includes(v));
+	const versionsToTest = directusVersions
+		.filter((v) => !blockedDirectusVersions.includes(v))
+		.map(assertDirectusVersion);
 
 	log(`Testing ${versionsToTest.length} versions: ${versionsToTest.join(', ')}`, colors.yellow);
 	log('═'.repeat(60), colors.blue);
