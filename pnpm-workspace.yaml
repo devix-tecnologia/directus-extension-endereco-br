@@ -1,1 +1,12 @@
-# Arquivo removido pois este projeto não é um monorepo.
+# Este projeto não é um monorepo: o arquivo existe só para as configurações do pnpm.
+# A partir do pnpm 11 as configurações do pnpm não são mais lidas do .npmrc
+# (nem do campo "pnpm" do package.json), por isso ficam aqui.
+
+# Aguarda 5 dias (7200 minutos) após publicação antes de permitir instalação.
+# Protege contra pacotes comprometidos que geralmente são descobertos rapidamente.
+minimumReleaseAge: 7200
+
+# Dependências autorizadas a rodar scripts de instalação (substitui onlyBuiltDependencies).
+allowBuilds:
+  esbuild: true
+  vue-demi: false

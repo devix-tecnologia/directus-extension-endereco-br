@@ -80,7 +80,7 @@
 		"typecheck": "tsc --noEmit",
 		"test": "vitest run",
 		"test:integration": "vitest run src/tests/*.integration.spec.ts",
-		"test:integration:fast": "DIRECTUS_TEST_VERSION=latest vitest run src/tests/bairro.integration.spec.ts",
+		"test:integration:fast": "vitest run src/tests/bairro.integration.spec.ts",
 		"test:all-versions": "node scripts/test-all-versions.js",
 		"test:unit": "vitest run --exclude '**/*.integration.spec.ts'",
 		"test:watch": "vitest",
@@ -90,9 +90,9 @@
 		"semantic-release": "semantic-release"
 	},
 	"devDependencies": {
-		"@directus/extensions": "^3.0.14",
-		"@directus/extensions-sdk": "^17.0.3",
-		"@directus/types": "^13.4.0",
+		"@directus/extensions": "^3.0.25",
+		"@directus/extensions-sdk": "^17.1.4",
+		"@directus/types": "^15.0.3",
 		"@eslint/js": "^9.39.1",
 		"@semantic-release/git": "^10.0.1",
 		"@semantic-release/github": "^12.0.2",
@@ -105,7 +105,7 @@
 		"prettier": "^3.7.3",
 		"rollup": "^4.53.3",
 		"semantic-release": "^25.0.2",
-		"taskin": "^3.0.3",
+		"taskin": "^5.0.0",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.48.1",
 		"vite": "^7.2.6",
@@ -129,7 +129,7 @@
 		"type": "git",
 		"url": "git+https://github.com/devix-tecnologia/directus-extension-endereco-br.git"
 	},
-	"packageManager": "pnpm@10.20.0",
+	"packageManager": "pnpm@12.7.0",
 	"engines": {
 		"node": ">=20",
 		"pnpm": ">=9.0.0"

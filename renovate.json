@@ -25,6 +25,24 @@
 			"priority": 10
 		},
 		{
+			"description": "Política Devix: Directus nunca >= 12 (mudança de licença). Mantém os pacotes na linha do Directus 11.",
+			"matchPackageNames": ["directus", "directus/directus"],
+			"allowedVersions": "<12"
+		},
+		{
+			"description": "Política Devix: SDK e tipos acompanham o Directus 11 (os majors seguintes são do Directus 12).",
+			"matchPackageNames": ["@directus/extensions-sdk"],
+			"allowedVersions": "<18"
+		},
+		{
+			"matchPackageNames": ["@directus/extensions"],
+			"allowedVersions": "<4"
+		},
+		{
+			"matchPackageNames": ["@directus/types"],
+			"allowedVersions": "<16"
+		},
+		{
 			"description": "Ignora atualizações unstable/beta/alpha",
 			"matchPackagePatterns": ["*"],
 			"ignoreUnstable": true

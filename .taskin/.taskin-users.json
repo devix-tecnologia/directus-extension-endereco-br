@@ -1,9 +1,9 @@
 {
-  "users": {
-    "sidarta-veloso": {
-      "email": "sidartaveloso@gmail.com",
-      "id": "sidarta-veloso",
-      "name": "Sidarta Veloso"
-    }
-  }
+	"users": {
+		"sidarta-veloso": {
+			"email": "sidartaveloso@gmail.com",
+			"id": "sidarta-veloso",
+			"name": "Sidarta Veloso"
+		}
+	}
 }
