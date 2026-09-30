@@ -13,6 +13,7 @@ function getPortForSuite(suiteId: string): number {
 	if (!suitePortMap[suiteId]) {
 		suitePortMap[suiteId] = nextPort++;
 	}
+
 	return suitePortMap[suiteId];
 }
 
@@ -104,6 +105,7 @@ req.end();
 			if (result.data?.data !== undefined) {
 				return { status: result.status, data: result.data.data };
 			}
+
 			return result;
 		}
 
@@ -125,6 +127,7 @@ async function cleanupDocker(_testSuiteId: string) {
 
 			const projectName = `endereco-br-${_testSuiteId}`;
 			const hostPort = getPortForSuite(_testSuiteId);
+
 			await execAsync(
 				`TEST_SUITE_ID=${_testSuiteId} DIRECTUS_VERSION=${process.env.DIRECTUS_VERSION} HOST_PORT=${hostPort} ${composeCmd} -p ${projectName} -f docker-compose.test.yml down --remove-orphans --volumes 2>/dev/null || true`
 			);
@@ -196,6 +199,7 @@ export async function setupTestEnvironment(testSuiteId: string = 'main') {
 
 		const projectName = `endereco-br-${testSuiteId}`;
 		const hostPort = getPortForSuite(testSuiteId);
+
 		const { stdout, stderr } = await execAsync(
 			`TEST_SUITE_ID=${testSuiteId} DIRECTUS_VERSION=${process.env.DIRECTUS_VERSION} HOST_PORT=${hostPort} ${composeCmd} -p ${projectName} -f docker-compose.test.yml up -d`
 		);
@@ -250,6 +254,7 @@ export async function teardownTestEnvironment(_testSuiteId: string = 'main') {
 
 		const projectName = `endereco-br-${_testSuiteId}`;
 		const hostPort = getPortForSuite(_testSuiteId);
+
 		await execAsync(
 			`TEST_SUITE_ID=${_testSuiteId} DIRECTUS_VERSION=${process.env.DIRECTUS_VERSION} HOST_PORT=${hostPort} ${composeCmd} -p ${projectName} -f docker-compose.test.yml down --remove-orphans`
 		);
