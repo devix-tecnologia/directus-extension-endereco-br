@@ -1,6 +1,6 @@
 # 🧩 Task 005 — Validar e declarar suporte às versões mais recentes do Directus 11
 
-- Status: pending
+- Status: in-progress
 - Type: feat
 - Assignee: sidarta-veloso
 
